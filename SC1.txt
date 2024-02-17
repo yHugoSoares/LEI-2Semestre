@@ -1,0 +1,48 @@
+1.
+
+a. Esta definição descreve um computador como um dispositivo eletrônico capaz de processar dados de entrada com base em instruções pré-definidas e produzir dados de saída. Isso enfatiza a capacidade de processamento e execução de instruções programadas.
+
+b. Essa definição amplia a ideia do computador para incluir tanto hardware quanto software. Destaca os componentes físicos, como a unidade aritmética e lógica (ALU), a memória RAM, o armazenamento e os dispositivos de entrada/saída, bem como o software, que engloba o sistema operacional e as aplicações. É uma descrição mais abrangente que considera tanto os aspectos físicos quanto os lógicos do computador.
+
+c. Essa definição é bastante genérica e pode se aplicar a vários dispositivos, não apenas a computadores. Descreve um sistema que realiza cálculos, mas não especifica a natureza desse sistema nem sua capacidade de processamento ou funcionamento.
+
+d. Essa definição enfatiza o aspecto binário do processamento de dados em um computador, indicando que os dados são manipulados por meio de operações aritméticas. Isso destaca a base fundamental da computação moderna, que opera em sistemas binários.
+
+e. Esta definição apresenta uma visão mais abrangente do computador, descrevendo-o como um sistema de processamento automático capaz de realizar uma ampla variedade de tarefas de forma rápida, precisa e sem erros. Isso inclui não apenas cálculos matemáticos complexos, mas também tarefas de comunicação, armazenamento e controle de dispositivos externos. É uma definição que destaca a versatilidade e eficiência do computador como uma ferramenta de processamento de informações.
+
+f. Essa definição destaca a capacidade do computador como uma plataforma de computação universal que pode ser configurada e adaptada para uma variedade de tarefas e funções. Isso enfatiza a flexibilidade do computador como uma ferramenta que pode ser utilizada para uma ampla gama de propósitos, dependendo das necessidades do usuário ou da aplicação específica.
+
+
+
+2. 
+
+a. Esta afirmação está correta. O ciclo fetch-decode-execute estabelece a sequência de operações necessárias para processar as instruções em um computador, incluindo como as instruções são buscadas na memória, decodificadas e executadas.
+
+b. Essa afirmação é parcialmente correta. O ciclo realmente consiste em três etapas sequenciais: busca, decodificação e execução. No entanto, a ordem exata das etapas pode variar dependendo da instrução sendo processada e da arquitetura do processador. Algumas instruções podem ter partes da decodificação e execução ocorrendo simultaneamente com a busca. Mas sempre por essa ordem.
+
+c. Esta afirmação está parcialmente correta. O ciclo de facto inicia com a busca da próxima instrução na memória, mas o endereço da próxima instrução normalmente é armazenado no Program Counter (PC) em vez do Instruction Register (IR). O IR geralmente armazena a instrução atualmente sendo executada, não o endereço da próxima instrução. Esta no IP e nao no IR.
+
+d. Essa afirmação está correta. O ciclo fetch-decode-execute é um loop contínuo que ocorre enquanto o computador está ligado. No entanto, instruções de salto condicional podem interromper esse ciclo normal, exigindo um tratamento diferenciado para determinar se o salto deve ser executado e, em caso afirmativo, para onde o programa deve ser desviado.
+
+
+
+3.
+
+Little Endian
+
+a. 0001 0010
+b. 1111 1111 0001 0010
+c. 0000 1111 0000 0000 1111 1111 0001 0010
+
+Big Endian 
+
+d. 0001 0010
+e. 0001 0010 1111 1111
+f. 0001 0010 1111 1111 0000 0000 0000 1111
+
+
+
+4.
+
+a. 375mins
+b. 225mins
