@@ -1,40 +1,34 @@
 #include <stdio.h>
-#include <locale.h>
 
-// Função para imprimir o símbolo do Yijing correspondente ao valor dado
-void imprimir_simbolo(int valor) {
-    char simbolos[] = "䷀䷁䷂䷃䷄䷅䷆䷇䷈䷉䷊䷋䷌䷍䷎䷏䷐䷑䷒䷓䷔䷕䷖䷗䷘䷙䷚䷛䷜䷝䷞䷟䷠䷡䷢䷣䷤䷥䷦䷧䷨䷩䷪䷫䷬䷭䷮䷯䷰䷱䷲䷳䷴䷵䷶䷷䷸䷹";
-    printf("%c ", simbolos[valor]);
-}
+void converter_para_yijing(unsigned long long int num) 
+{
+    char yijing[64] =   "䷀	䷁ 	䷂ 	䷃ 	䷄ 	䷅ 	䷆ 	䷇ 	䷈ 	䷉ 	䷊ 	䷋ 	䷌ 	䷍ 	䷎ 	䷏"
+                        "䷐ ䷑ 	䷒ 	䷓ 	䷔ 	䷕ 	䷖ 	䷗ 	䷘ 	䷙ 	䷚ 	䷛ 	䷜ 	䷝ 	䷞ 	䷟"
+                        "䷠ ䷡ 	䷢ 	䷣ 	䷤ 	䷥ 	䷦ 	䷧ 	䷨ 	䷩ 	䷪ 	䷫ 	䷬ 	䷭ 	䷮ 	䷯"
+                        "䷰ ䷱ 	䷲ 	䷳ 	䷴ 	䷵ 	䷶ 	䷷ 	䷸ 	䷹ 	䷺ 	䷻ 	䷼ 	䷽ 	䷾ 	䷿";
+    char resultado[64];
+    int i = 0;
 
-// Função para converter um número decimal para base 64 e imprimir os símbolos correspondentes
-void converter_para_base64(unsigned long long int numero) {
-    int base64[64];
-    int indice = 0;
-
-    // Convertendo para base 64
-    while (numero > 0) {
-        base64[indice++] = numero % 64;
-        numero /= 64;
+    while (num > 0) 
+    {
+        resultado[i++] = yijing[num % 64];
+        num /= 64;
     }
 
-    // Imprimindo os símbolos correspondentes
-    for (int i = indice - 1; i >= 0; i--) {
-        imprimir_simbolo(base64[i]);
+    for (int j = i - 1; j >= 0; j--) 
+    {
+        printf("%c ", resultado[j]);
     }
 }
 
 int main() 
 {
-    // Mudar para UTF8
-    setlocale(LC_CTYPE, "C.UTF-8");
-    
-    unsigned long long int numero;
+    unsigned long long int num;
     printf("Digite um número: ");
-    scanf("%llu", &numero);
+    scanf("%llu", &num);
 
-    printf("Número em base 64: ");
-    converter_para_base64(numero);
+    printf("O número %llu convertido para o sistema Yijing é: \n", num);
+    converter_para_yijing(num);
 
     return 0;
 }
