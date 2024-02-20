@@ -12,31 +12,37 @@ void multiplicacao(float m, int n)
     printf("O resultado da multiplicação %.2f*%i = %.2f\n", m, n, r);
 }
 
-void multotimizada(float  p, int o)
+void multotimizada(int  p, int o)
 {
-    float t = 0;
-    int k = p;
-    scanf("%f %i",&p, &o);
-    for (int i = o; i >= 1; i = i / 2)
+    scanf("%d %d", &o, &p);
+    int t = 0;
+    
+    if (p != 1)
     {
-        if (i == 1)
+        while (p > 1)
         {
-            t = t + k;
-        }
-        if (i%2 != 0)
-        {
-            k = k*2;
-            t += k;
-        }
-        else
-        {
-            k = k*2;
+            if (p%2 != 0)
+            {
+                o = o * 2;
+                p = p / 2;
+            }
+            else
+            {
+                t = t + o;
+                o = o * 2;
+                p = p / 2;
+            }
         }
     }
-    printf("O resultado da multiplicação %.2f*%i = %.2f\n", p, o, t);
+    else
+    {
+        t = t + o;
+    }
+    
+    printf("O resultado da multiplicação é: %i\n" , t);
 }
 
-void main()
+int main()
 {
     int m, n, o, p;
     multiplicacao(m, n);
