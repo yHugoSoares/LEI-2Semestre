@@ -28,17 +28,17 @@ void yijing(unsigned long long int x)
     while (count > 0) 
     {
         int t = a[count];
-        printf("%s", yijing[count]);
+        printf("%s ", yijing[t]);
         count--;
     }
     int t = a[count];
-    printf("%s\n", yijing[count]);
+    printf("%s \n", yijing[t]);
 }
 
 int main() 
 {
     unsigned long long int x;
-    printf("Digite um número: ");
+    printf("Digite um número: \n");
     if (scanf("%llu", &x) == 1)
     {
         yijing(x);
