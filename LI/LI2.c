@@ -16,6 +16,7 @@ void yijing(unsigned long long int x)
     unsigned long long int i, j = x;
     int a[100];
     int count = 0;
+    
     while (j >= 64)
     {
         i = j%64;
@@ -25,6 +26,7 @@ void yijing(unsigned long long int x)
     }
     i = j%64;
     a[count] = i;
+
     while (count > 0)
     {
         int t = a[count];
