@@ -12,8 +12,8 @@ void yijing(unsigned long long int x)
         "䷰", "䷱", "䷲", "䷳", "䷴", "䷵", "䷶", "䷷", "䷸", "䷹", "䷺", "䷻", "䷼", "䷽", "䷾", "䷿"
     };
     unsigned long long int i, j = x;
-    int count = 0;
     int a[100];
+    int count = 0;
 
     // Calcula os valores em base 64 e armazena no array a[]
     while (j >= 64) 
@@ -33,13 +33,12 @@ void yijing(unsigned long long int x)
         count--;
     }
     int t = a[count];
-    printf("%s \n", yijing[t]);
+    printf("%s\n", yijing[t]);
 }
 
 int main() 
 {
     unsigned long long int x;
-    printf("Digite um número: \n");
     if (scanf("%llu", &x) == 1)
     {
         yijing(x);
