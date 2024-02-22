@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
 
 void yijing(unsigned long long int x) 
 {
@@ -18,8 +20,7 @@ void yijing(unsigned long long int x)
     {
         i = j % 64;
         j = j / 64;
-        a[count] = i;
-        count++;
+        a[count++] = i;
     }
     i = j % 64;
     a[count] = i;
