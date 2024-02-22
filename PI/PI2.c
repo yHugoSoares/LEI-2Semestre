@@ -24,7 +24,7 @@ void multotimizada(int  p, int o)
             t = t + o;
             o = o * 2;
             p = p / 2;
-        }
+        }   
         else
         {
             o = o * 2;
@@ -38,7 +38,7 @@ void multotimizada(int  p, int o)
     printf("O resultado da multiplicação é: %i\n" , t); 
 }
 
-int mdc(int a, int b)
+int mdc2(int a, int b)
 {
     printf("Escolha dois numeros:\n");
     scanf("%i %i", &a, &b);
@@ -62,7 +62,7 @@ int mdc(int a, int b)
 int main()
 {
     int m, n, o, p, a, b;
-    mdc(a, b);
+    mdc2(a, b);
     //multiplicacao(m, n);
     //multotimizada(o, p);
 }
