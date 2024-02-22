@@ -35,11 +35,12 @@ void multotimizada(int  p, int o)
     {
         t = t + o;
     }
-    
     printf("O resultado da multiplicação é: %i\n" , t); 
 }
+
 int mdc(int a, int b)
 {
+    printf("Escolha dois numeros:\n");
     scanf("%i %i", &a, &b);
     while (a != b)
     {
@@ -54,7 +55,7 @@ int mdc(int a, int b)
     }
     if (a == b)
     {
-        printf("%i\n", a);
+        printf("O mdc é: %i\n", a);
     }
 }
 
