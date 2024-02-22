@@ -120,13 +120,16 @@ int main()
     // scanf("%i", &e);
     // fib1(e);
     // printf("Finobacci desse número é: %i\n", fib1(e));
+
     scanf("%i", &f);
     fib2(f);
     printf("Finobacci desse número é: %i\n", fib2(f));
 
     //mdc2(a, b);
+
     //mdc3(c, d);
-    //multiplicacao(m, n);
-    //multotimizada(o, p);
     
+    //multiplicacao(m, n);
+    
+    //multotimizada(o, p);
 }
