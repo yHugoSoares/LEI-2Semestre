@@ -14,37 +14,54 @@ void multiplicacao(float m, int n)
 
 void multotimizada(int  p, int o)
 {
-    scanf("%d %d", &o, &p);
+    scanf("%i %i", &o, &p);
     int t = 0;
     
-    if (p != 1)
+    while (p > 1)
     {
-        while (p > 1)
+        if (p%2 != 0)
         {
-            if (p%2 != 0)
-            {
-                o = o * 2;
-                p = p / 2;
-            }
-            else
-            {
-                t = t + o;
-                o = o * 2;
-                p = p / 2;
-            }
+            t = t + o;
+            o = o * 2;
+            p = p / 2;
+        }
+        else
+        {
+            o = o * 2;
+            p = p / 2;
         }
     }
-    else
+    if (p == 1)
     {
         t = t + o;
     }
     
-    printf("O resultado da multiplicação é: %i\n" , t);
+    printf("O resultado da multiplicação é: %i\n" , t); 
+}
+int mdc(int a, int b)
+{
+    scanf("%i %i", &a, &b);
+    while (a != b)
+    {
+        if (a > b)
+        {
+            a = a - b;
+        }
+        else
+        {
+            b = b - a;
+        }
+    }
+    if (a == b)
+    {
+        printf("%i\n", a);
+    }
 }
 
 int main()
 {
-    int m, n, o, p;
-    multiplicacao(m, n);
-    multotimizada(o, p);
+    int m, n, o, p, a, b;
+    mdc(a, b);
+    //multiplicacao(m, n);
+    //multotimizada(o, p);
 }
