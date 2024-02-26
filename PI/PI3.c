@@ -35,7 +35,14 @@ void inverteArray(int v[], int N)
 
 int maximum(int v[], int N, int *m)
 {
-
+    *m = 0;
+    for (int i = 0; i < N; i++)
+    {
+        if (v[i] > *m)
+        {
+            *m = v[i];
+        }
+    }
 }
 
 // void ex1a()
@@ -76,7 +83,13 @@ int main()
 
     //inverteArray(v, 15);
 
-    int N, *m = 0;
+    /*
+    int N, m = 0;
+    scanf("%i", &N);
+    maximum(v, N, &m);
+    printf("O maior nº é: %d\n", m);
+    */
+
     
 
     return 0;
