@@ -68,11 +68,15 @@ void quadrados(int q[], int N)
 void pascal(int v[], int N)
 {
     unsigned long long int facti, factN, factR = 1;
+    for (int i = 0; i <= N; i++)
+    {
+        factN *= i;
+    }
+    
     for (int i = 1; i <= N; i++)
     {
         facti *= i-1;
-        factN *= N;
-        factR *= (N-i-1);
+        factR *= (N-i+1);
         v[i] = (factN)/(facti*factR);
     }
     
