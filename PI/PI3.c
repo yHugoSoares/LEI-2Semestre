@@ -70,10 +70,10 @@ void pascal(int v[], int N)
     unsigned long long int facti, factN, factR = 1;
     for (int i = 1; i <= N; i++)
     {
-        facti *= i;
+        facti *= i-1;
         factN *= N;
-        factR *= (N-i);
-        v[i] = (factN)/(factR*facti);
+        factR *= (N-i-1);
+        v[i] = (factN)/(facti*factR);
     }
     
 }
