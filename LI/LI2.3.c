@@ -22,7 +22,16 @@ int main()
             return 1;
         }
 
-        int sign = binary[0] == '1' ? -1 : 1;
+        int sign;
+        if (binary[0] == '1')
+        {
+            sign = -1;
+        }
+        else
+        {
+            sign = 1;
+        }
+        
         int exponent = 0;
         for (int j = 1; j <= E; j++) 
         {
@@ -46,11 +55,18 @@ int main()
         {
             if (mantissa == 1)
             {
-                number = sign == 1 ? INFINITY : -INFINITY;
+                if (sign == 1)
+                {
+                    printf("INFINITY\n");
+                }
+                else
+                {
+                    printf("-INFINITY\n");
+                }
             } 
             else 
             {
-                number = NAN;
+                printf("NaN\n");
             }
         } 
         else 
