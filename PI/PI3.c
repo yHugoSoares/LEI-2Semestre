@@ -1,5 +1,17 @@
 #include <stdio.h>
 
+void ex1a()
+{
+    int *x, *y, *z, i;
+    y = x;
+    z = x + 3;
+    for (i = 0; i < 5; i++)
+    {
+        printf("%d %d %d\n", x[i], *y, *z);
+        y = y+1; z = z+2;
+    }    
+}
+
 void swapM(int *x, int *y)
 {
     int aux = *x;
@@ -45,17 +57,13 @@ int maximum(int v[], int N, int *m)
     }
 }
 
-// void ex1a()
-// {
-//     int *y, *z, i;
-//     y = x;
-//     z = x + 3;
-//     for (i = 0; i < 5; i++)
-//     {
-//         printf("%d %d %d\n", x[i], *y, *z);
-//         y = y+1; z = z+2;
-//     }    
-// }
+void quadrados(int q[], int N)
+{
+    for (int i = 0; i < N; i++)
+    {
+        q[i] = i*i;
+    }
+}
 
 int main()
 {
@@ -65,31 +73,37 @@ int main()
     scanf("%i %i", &x, &y);
     swapM(&x, &y);
     printf("x:%d\ny:%d\n", x, y);
-    */
-    
-    /*
+
+
     int i,j;
     scanf("%i %i", &i, &j);
     swap(v, i, j);
     printf("%i, %i\n", v[i], v[j]);
-    */
+    
 
-    /*
     int N, t;
     scanf("%i", &N);
     t = soma(v, N);
     printf("Soma total dá: %i\n", t);
-    */
+    
 
-    //inverteArray(v, 15);
+    inverteArray(v, 15);
 
-    /*
+    
     int N, m = 0;
     scanf("%i", &N);
     maximum(v, N, &m);
     printf("O maior nº é: %d\n", m);
     */
 
+    int N = 0;
+    scanf("%i", &N);
+    int q[N];
+    quadrados(q, N);
+    for (int i = 0; i < N; i++)
+    {
+        printf("q[%i]: %i\n", i, q[i]);
+    }   
     
 
     return 0;
