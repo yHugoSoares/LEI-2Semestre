@@ -65,6 +65,19 @@ void quadrados(int q[], int N)
     }
 }
 
+void pascal(int v[], int N)
+{
+    unsigned long long int facti, factN, factR = 1;
+    for (int i = 1; i <= N; i++)
+    {
+        facti *= i;
+        factN *= N;
+        factR *= (N-i);
+        v[i] = (factN)/(factR*facti);
+    }
+    
+}
+
 int main()
 {
     int v[15] = {7, 3, 4, 6, 10, 12, 11, 2, 1, 5, 7, 8, 11, 9, 20};
@@ -94,7 +107,7 @@ int main()
     scanf("%i", &N);
     maximum(v, N, &m);
     printf("O maior nº é: %d\n", m);
-    */
+    
 
     int N = 0;
     scanf("%i", &N);
@@ -104,7 +117,18 @@ int main()
     {
         printf("q[%i]: %i\n", i, q[i]);
     }   
+    */
+
+    int N = 0;
+    scanf("%i", &N);
+    int x[N];
+    pascal(x, N);
+    for (int i = 1; i <= N; i++)
+    {
+        printf("%iº: %i\n", i, x[i]);
+    }
     
+
 
     return 0;
 }
