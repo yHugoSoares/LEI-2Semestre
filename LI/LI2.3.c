@@ -42,8 +42,9 @@ int main()
         {
             number = 0;
         } 
-        else if (exponent == (1 << (E - 1)) - 1) {
-            if (mantissa == 1) 
+        else if (exponent == (1 << (E - 1)) - 1) 
+        {
+            if (mantissa == 1)
             {
                 number = sign == 1 ? INFINITY : -INFINITY;
             } 
