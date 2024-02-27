@@ -5,13 +5,22 @@
 int main() 
 {
     int N;
-    scanf("%d", &N);
+    if (scanf("%d", &N) != 1)
+    {
+        fprintf(stderr, "Invalid input\n");
+        return 1;
+    }
+
 
     for (int i = 0; i < N; i++) 
     {
         int E, M;
         char binary[50];
-        scanf("%d %d %s", &E, &M, binary);
+        if (scanf("%d %d %s", &E, &M, binary) != 3)
+        {
+            fprintf(stderr, "Invalid input\n");
+            return 1;
+        }
 
         int sign = binary[0] == '1' ? -1 : 1;
         int exponent = 0;
