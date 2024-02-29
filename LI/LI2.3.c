@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <string.h>
+#include <assert.h>
 
 int main() 
 {
@@ -15,7 +16,7 @@ int main()
     for (int i = 0; i < N; i++) 
     {
         int E, M;
-        char binary[50];
+        char binary[BUFSIZ] = {0};
         if (scanf("%d %d %s", &E, &M, binary) != 3)
         {
             fprintf(stderr, "Invalid input\n");
@@ -37,12 +38,12 @@ int main()
         {
             exponent = exponent * 2 + (binary[j] - '0');
         }
-        exponent -= (1 << (E - 1)) - 1;
+        exponent = -exponent;
 
         double mantissa = 0;
         for (int j = E + 1; j < E + M + 1; j++) 
         {
-            mantissa += (binary[j] - '0') * pow(2, E - j);
+            mantissa += (binary[j] - '0') * pow(2, j - 1);
         }
         mantissa += 1;
 
@@ -71,7 +72,7 @@ int main()
         } 
         else 
         {
-            number = sign * mantissa * pow(2, exponent);
+            number = sign * mantissa * pow(2, exponent-1);
         }
 
         printf("%lg\n", number);
