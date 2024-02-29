@@ -28,25 +28,25 @@ int main()
         int exponent = 0;
         for (int j = 1; j <= E; j++) 
         {
-            exponent = exponent * 2 + (binary[j] - '0');
+            exponent += pow(2, E - j - 2)  * (binary[j] - '0');
         }
-        exponent -= (1 << (E - 1)) - 1;
+        exponent -= ((1 << E)- 1);
 
         double mantissa = 1.0;
         for (int j = E + 1; j < E + M + 1; j++) 
         {
-            mantissa += (binary[j] - '0') * pow(2, E - j);
+            mantissa += (binary[j] - '0') * pow(2, j - E - 2);
         }
 
         double number;
-        if (exponent == -(1 << (E - 1)) + 1 && mantissa == 1.0) 
+        if (exponent == ((1 << E) - 1) && mantissa == 1.0) 
         {
             if (sign < 0)
                 printf("-0\n");
             else
                 printf("0\n");
         }
-        else if (exponent == (1 << (E - 1)) - 1)
+        else if (exponent == (1 << E) - 1)
         {
             if (mantissa == 1.0)
             {
