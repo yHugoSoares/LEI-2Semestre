@@ -133,11 +133,6 @@ int main()
             printf("%iº: %i\n", i+1, x[i]);
         }
     }
-    
-    
-    
-    
-
 
     return 0;
 }
