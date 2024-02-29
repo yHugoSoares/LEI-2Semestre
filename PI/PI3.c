@@ -67,19 +67,18 @@ void quadrados(int q[], int N)
 
 void pascal(int v[], int N)
 {
-    unsigned long long int facti, factN, factR = 1;
-    for (int i = 0; i <= N; i++)
-    {
-        factN *= i;
-    }
-    
+    v[0] = 1;
+
     for (int i = 1; i <= N; i++)
     {
-        facti *= i-1;
-        factR *= (N-i+1);
-        v[i] = (factN)/(facti*factR);
+        v[i] = fact(N) / (fact(i) * fact(N - i));
     }
-    
+}
+int fact(int n)
+{
+    if (n == 0 || n == 1)
+        return 1;
+    return n * fact(n - 1);
 }
 
 int main()
@@ -125,12 +124,18 @@ int main()
 
     int N = 0;
     scanf("%i", &N);
-    int x[N];
-    pascal(x, N);
-    for (int i = 1; i <= N; i++)
+    for (int j = 0; j < N; j++)
     {
-        printf("%iº: %i\n", i, x[i]);
+        int x[j];
+        pascal(x, j);
+        for (int i = 0; i <= j; i++)
+        {
+            printf("%iº: %i\n", i+1, x[i]);
+        }
     }
+    
+    
+    
     
 
 
