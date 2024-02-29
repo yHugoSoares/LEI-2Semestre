@@ -23,60 +23,45 @@ int main()
             return 1;
         }
 
-        int sign;
-        if (binary[0] == '1')
-        {
-            sign = -1;
-        }
-        else
-        {
-            sign = 1;
-        }
-        
+        int sign = binary[0] == '1' ? -1 : 1;
+
         int exponent = 0;
         for (int j = 1; j <= E; j++) 
         {
             exponent = exponent * 2 + (binary[j] - '0');
         }
-        exponent = -exponent;
+        exponent -= (1 << (E - 1)) - 1;
 
-        double mantissa = 0;
+        double mantissa = 1.0;
         for (int j = E + 1; j < E + M + 1; j++) 
         {
-            mantissa += (binary[j] - '0') * pow(2, j - 1);
+            mantissa += (binary[j] - '0') * pow(2, E - j);
         }
-        mantissa += 1;
 
         double number;
-        if (exponent == -(1 << (E - 1)) + 1 && mantissa == 1) 
+        if (exponent == -(1 << (E - 1)) + 1 && mantissa == 1.0) 
         {
-            number = 0;
-        } 
-        else if (exponent == (1 << (E - 1)) - 1) 
+            if (sign < 0)
+                printf("-0\n");
+            else
+                printf("0\n");
+        }
+        else if (exponent == (1 << (E - 1)) - 1)
         {
-            if (mantissa == 1)
-            {
-                if (sign == 1)
-                {
-                    printf("INFINITY\n");
-                }
-                else
-                {
-                    printf("-INFINITY\n");
-                }
-            } 
-            else 
+            if (mantissa == 1.0)
             {
                 printf("NaN\n");
             }
-        } 
-        else 
-        {
-            number = sign * mantissa * pow(2, exponent-1);
+            else
+            {
+                number = sign == 1 ? INFINITY : -INFINITY;
+                printf("%lg\n", number);
+            }
         }
-
-        printf("%lg\n", number);
+        else
+        {
+            number = sign * mantissa * pow(2, exponent);
+            printf("%lg\n", number);
+        }
     }
-
-    return 0;
 }
