@@ -1,0 +1,37 @@
+1.
+
+a) Verdadeira
+
+b) Falsa, Os computadores espaciais tambem usam binario
+
+c) Falsa, a representação tambem pode ser feita em maiusculas (ex: ASCII 65 - A // 97 - a)
+
+d) Verdadeira
+
+e) Falsa, "Todas as imagens", todas não mas sim uma grande parte, agora as imagens em preto e branco nao sao representadas pelos 3 canais.
+
+f) Falsa, pois quanto melhor for a taxa geralmente melhor a qualidade.
+
+2.
+
+a) 	P  a   r  a  b   e   n   s
+	80 97 114 97 98 101 110 115
+
+b) 	
+	1010011 1101001 1110011 1110100 1100101 1101101 1100001
+
+3.
+a)	128 x 128 x 6 = 98304 bits
+	Total = 25000 x 98304 = 2457600000 bits = 307200000 bytes
+
+	300 MiB = 300 * 1024^2 = 314572800 bytes
+
+	Logo Cabe.
+
+4.
+
+a) 10KHz = 10000Hz || 10 bits resolucao || 100.000bits/s = 12.500 bytes/s
+
+4Gib = 4 * 1024^3 = 4294967296 bytes
+
+Total Tempo = 343547.3837 sec = 95h 26min 37sec
