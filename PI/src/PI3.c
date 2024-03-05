@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+/*
 void ex1a()
 {
     int *x, *y, *z, i;
@@ -64,6 +65,19 @@ void quadrados(int q[], int N)
         q[i] = i*i;
     }
 }
+*/
+
+int fact(int n)
+{
+    if (n == 0 || n == 1)
+    {
+        return 1;
+    }
+    else
+    {
+    return n * fact(n - 1);
+    }
+}
 
 void pascal(int v[], int N)
 {
@@ -74,16 +88,10 @@ void pascal(int v[], int N)
         v[i] = fact(N) / (fact(i) * fact(N - i));
     }
 }
-int fact(int n)
-{
-    if (n == 0 || n == 1)
-        return 1;
-    return n * fact(n - 1);
-}
 
 int main()
 {
-    int v[15] = {7, 3, 4, 6, 10, 12, 11, 2, 1, 5, 7, 8, 11, 9, 20};
+    //int v[15] = {7, 3, 4, 6, 10, 12, 11, 2, 1, 5, 7, 8, 11, 9, 20};
     /*
     int x,y;
     scanf("%i %i", &x, &y);
@@ -128,11 +136,11 @@ int main()
     {
         int x[j];
         pascal(x, j);
+        printf("--------------------\n");
         for (int i = 0; i <= j; i++)
-        {
+        {   
             printf("%iº: %i\n", i+1, x[i]);
         }
     }
-
     return 0;
 }

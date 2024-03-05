@@ -117,19 +117,19 @@ int main()
     // Defenicao Variaveis
     int m, n, o, p, a, b, c, d, e, f;
     
-    // scanf("%i", &e);
-    // fib1(e);
-    // printf("Finobacci desse número é: %i\n", fib1(e));
+    scanf("%i", &e);
+    fib1(e);
+    printf("Finobacci desse número é: %i\n", fib1(e));
 
     scanf("%i", &f);
     fib2(f);
     printf("Finobacci desse número é: %i\n", fib2(f));
 
-    //mdc2(a, b);
+    mdc2(a, b);
 
-    //mdc3(c, d);
+    mdc3(c, d);
     
-    //multiplicacao(m, n);
+    multiplicacao(m, n);
     
-    //multotimizada(o, p);
+    multotimizada(o, p);
 }
