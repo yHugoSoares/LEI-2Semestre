@@ -30,10 +30,10 @@ int Partial(char *frase)
             for (long long unsigned int i = 0; i < sizeof(fraseUpper); i++)
             {
                 int index = fraseUpper[i];
-                valueO = expected[index - 65];    
-                sum += (pow(valueO - valueG), 2) / valueO;
+                valueO = expected[index - 65];
                 int index = fraseUpper[i] + j;
                 valueG = expected[index - 65];
+                sum += (pow(valueO - valueG), 2) / valueO;
             }   
         }
         
