@@ -4,6 +4,7 @@
 #include <string.h>
 #include <assert.h>
 #include <ctype.h>
+#include <math.h>
 
 void PhraseToUpper(char *frase)
 {
@@ -11,6 +12,16 @@ void PhraseToUpper(char *frase)
     {
         frase[i] = toupper(frase[i]);
     }
+}
+
+size_t count_tokens(const char *frase, char token)
+{
+  size_t count = 0;
+  while(*frase != '\0')
+  {
+    count += *frase++ == token;
+  }
+  return count;
 }
 
 // FORMULA -- SUM((Original - Obtida)^2 / Original)
@@ -23,21 +34,25 @@ int Partial(char *frase)
                           38.64, 29.23, 35.43, 18.51, 5.13, 6.57, 1.48, 9.06, 1.39};
     strcpy(fraseUpper, frase);
     PhraseToUpper(fraseUpper);
-    float valueO = 0, valueG = 0, sum = __FLT_MAX__;
+    float valueG = 0, sum1 = __FLT_MAX__;
     
     for (int j = 0; j <= 26; j++)
+    {
+        float sum2 = 0;
+        for (long long unsigned int i = 0; i < sizeof(fraseUpper); i++)
         {
-            for (long long unsigned int i = 0; i < sizeof(fraseUpper); i++)
-            {
-                int index = fraseUpper[i];
-                valueO = expected[index - 65];
-                int index = fraseUpper[i] + j;
-                valueG = expected[index - 65];
-                sum += (pow(valueO - valueG), 2) / valueO;
-            }   
+            int times = 0;
+            int index = fraseUpper[i];
+            times = count_tokens(fraseUpper, index);
+            valueG = expected[index - 65] - j;
+            sum2 += (pow((valueG - times), 2)) / valueG;
+        }   
+        if (sum2 < sum1)
+        {
+            delta = j;
+            sum2 = sum1;
         }
-        
-    
+    }  
     return delta;
 }
 
