@@ -36,22 +36,19 @@ int Partial(char *frase)
     strcpy(fraseUpper, frase);
     PhraseToUpper(fraseUpper);
 
-    float valueG = 0, sum1 = __FLT_MAX__;
+    float valueG = 0, sum1 = 10000000000;
     
     for (int j = 0; j < 26; j++)
     {
         float sum2 = 0.0;
         for (long long unsigned int i = 0; i < strlen(fraseUpper); i++)
         {
-            if (isalpha(fraseUpper[i]))
-            {
-                int times = 0;
-                char shiftedChar = (fraseUpper[i] - 'A' + j);
-                times = count_tokens(fraseUpper, shiftedChar);
-                int index = shiftedChar - 'A';
-                valueG = expected[index];
-                sum2 += ((pow((valueG - times), 2)) / valueG);
-            }
+            int times = 0;
+            char shiftedChar = (fraseUpper[i] - 'A' + j);
+            times = count_tokens(fraseUpper, shiftedChar);
+            int index = shiftedChar - 'A';
+            valueG = expected[index];
+            sum2 += ((pow((valueG - times), 2)) / valueG);
         }   
         if (sum2 < sum1)
         {
