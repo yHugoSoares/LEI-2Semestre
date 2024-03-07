@@ -14,6 +14,16 @@ void PhraseToUpper(char *frase)
     }
 }
 
+size_t count_tokens(const char *frase, char token)
+{
+  size_t count = 0;
+  while(*frase != '\0')
+  {
+    count += *frase++ == token;
+  }
+  return count;
+}
+
 // FORMULA -- SUM((Original - Obtida)^2 / Original)
 int Partial(char *frase)
 {
@@ -26,21 +36,20 @@ int Partial(char *frase)
     strcpy(fraseUpper, frase);
     PhraseToUpper(fraseUpper);
 
-    float valueO = 0, valueG = 0, sum1 = 10000000000;
+    float valueG = 0, sum1 = 10000000000;
     
     for (int j = 0; j < 26; j++)
     {
         float sum2 = 0.0;
         for (long long unsigned int i = 0; i < strlen(fraseUpper); i++)
         {
-            char shiftedChar = (fraseUpper[i] - 'A');
+            int times = 0;
+            char shiftedChar = (fraseUpper[i] - 'A' + j);
+            times = count_tokens(fraseUpper, shiftedChar);
             int index = shiftedChar - 'A';
-            valueO = expected[index];
-            shiftedChar = (fraseUpper[i] - 'A' + j);
-            index = shiftedChar - 'A';
             valueG = expected[index];
-            
-            sum2 += ((pow((valueO - valueG), 2)) / valueO);
+            sum2 += ((pow((valueG - times), 2)) / valueG);
+        
         }   
         if (sum2 < sum1)
         {
