@@ -32,27 +32,32 @@ int Partial(char *frase)
     float expected[26] = {43.31, 10.56, 23.13, 17.25, 56.88, 9.24, 12.59, 15.31,
                           38.45, 1.00, 5.61, 27.98, 15.36, 33.92, 36.51, 16.14, 1.00,
                           38.64, 29.23, 35.43, 18.51, 5.13, 6.57, 1.48, 9.06, 1.39};
+    
     strcpy(fraseUpper, frase);
     PhraseToUpper(fraseUpper);
+
     float valueG = 0, sum1 = __FLT_MAX__;
     
-    for (int j = 0; j <= 26; j++)
+    for (int j = 0; j < 26; j++)
     {
-        float sum2 = 0;
+        float sum2 = 0.0;
         for (long long unsigned int i = 0; i < strlen(fraseUpper); i++)
         {
-            int times = 0;
-            int index = fraseUpper[i] - 'A';
-            times = count_tokens(fraseUpper, fraseUpper[i]);
-            valueG = expected[index];
-            sum2 += ((pow((valueG - times), 2)) / valueG);
+            if (isalpha(fraseUpper[i]))
+            {
+                int times = 0;
+                char shiftedChar = (fraseUpper[i] - 'A' + j);
+                times = count_tokens(fraseUpper, shiftedChar);
+                int index = shiftedChar - 'A';
+                valueG = expected[index];
+                sum2 += ((pow((valueG - times), 2)) / valueG);
+            }
         }   
         if (sum2 < sum1)
         {
             delta = j;
             sum1 = sum2;
         }
-        printf("%d %f\n", j, sum2);
     }  
     return delta;
 }
@@ -70,7 +75,7 @@ int main()
     {
         if ((frase[i] >= 'A' && frase[i] <= 'Z') || (frase[i] >= 'a' && frase[i] <= 'z'))
         {
-            if ((frase[i] + delta > 'Z' && frase[i] <= 'Z') || (frase[i] + delta > 'z'))
+            if ((frase[i] + delta > 'Z' && frase[i] + delta <= 'a') || (frase[i] + delta > 'z'))
             {
                 palavra[i] = frase[i] + delta - 26;
             }
