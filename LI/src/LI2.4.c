@@ -45,13 +45,14 @@ int Partial(char *frase)
             int index = fraseUpper[i] - 'A';
             times = count_tokens(fraseUpper, fraseUpper[i]);
             valueG = expected[index];
-            sum2 += (pow((valueG - times), 2)) / valueG;
+            sum2 += ((pow((valueG - times), 2)) / valueG);
         }   
         if (sum2 < sum1)
         {
             delta = j;
             sum1 = sum2;
         }
+        printf("%d %f\n", j, sum2);
     }  
     return delta;
 }
