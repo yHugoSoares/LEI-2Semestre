@@ -1,92 +1,88 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <string.h>
-#include <assert.h>
+#include <float.h>
 #include <ctype.h>
 #include <math.h>
 
-void PhraseToUpper(char *frase)
-{
-    for (int i = 0; frase[i]; i++)
-    {
-        frase[i] = toupper(frase[i]);
-    }
-}
 
-size_t count_tokens(const char *frase, char token)
-{
-  size_t count = 0;
-  while(*frase != '\0')
-  {
-    count += *frase++ == token;
-  }
-  return count;
-}
-
-// FORMULA -- SUM((Original - Obtida)^2 / Original)
-int Partial(char *frase)
-{
-    int delta = 0;
-    char fraseUpper[10000];
-    float expected[26] = {43.31, 10.56, 23.13, 17.25, 56.88, 9.24, 12.59, 15.31,
+// Frequencias de cada letra
+float expected[26] = {43.31, 10.56, 23.13, 17.25, 56.88, 9.24, 12.59, 15.31,
                           38.45, 1.00, 5.61, 27.98, 15.36, 33.92, 36.51, 16.14, 1.00,
                           38.64, 29.23, 35.43, 18.51, 5.13, 6.57, 1.48, 9.06, 1.39};
-    
-    strcpy(fraseUpper, frase);
-    PhraseToUpper(fraseUpper);
-
-    float valueG = 0, sum1 = 10000000000;
-    
-    for (int j = 0; j < 26; j++)
-    {
-        float sum2 = 0.0;
-        for (long long unsigned int i = 0; i < strlen(fraseUpper); i++)
-        {
-            int times = 0;
-            char shiftedChar = (fraseUpper[i] - 'A' + j);
-            times = count_tokens(fraseUpper, shiftedChar);
-            int index = shiftedChar - 'A';
-            valueG = expected[index];
-            sum2 += ((pow((valueG - times), 2)) / valueG);
-        
-        }   
-        if (sum2 < sum1)
-        {
-            delta = j;
-            sum1 = sum2;
-        }
-    }  
-    return delta;
-}
-
-int main()
+// Conta qual a quantidade de numero de letras
+void contaLetras(char *frase, int *freq)
 {
-    char frase[10000];
-    char palavra[10000];
-    if (fgets(frase, 10000, stdin) == NULL)
+    int tam = strlen(frase);
+    for (int i = 0; i < 26; i++)
     {
-        return 1;
+        freq[i] = 0;
     }
-    int delta = Partial(frase);
-    for (int i = 0; i < 10000; i++)
+    for (int i = 0; i < tam; i++)
     {
-        if ((frase[i] >= 'A' && frase[i] <= 'Z') || (frase[i] >= 'a' && frase[i] <= 'z'))
+        if (isalpha(frase[i]))
         {
-            if ((frase[i] + delta > 'Z' && frase[i] + delta <= 'a') || (frase[i] + delta > 'z'))
+            int index = toupper(frase[i]) - 'A';
+            freq[index]++;
+        }   
+    }
+}
+// Calcula a parcial com a formula SUM(((Ei-Oi)^2)/2)
+float calculaParcial(int *freq)
+{
+    float resultado = 0.0;
+    for (int i = 0; i < 26; i++)
+    {
+        resultado += pow(expected[i] - freq[i] , 2)/expected[i];
+    }
+    return resultado;
+}
+// Da a frase cifrada de acordo com o index, ou com o deslocamento
+void cifraCeaser(char *frase, int deslocamento, char *cifrado)
+{
+    for (long unsigned int i = 0; i < strlen(frase); i++)
+    {
+        if (isalpha(frase[i]))
+        {
+            if (frase[i] >= 'A' && frase[i] <= 'Z')
             {
-                palavra[i] = frase[i] + delta - 26;
+                cifrado[i] = 'A' + (frase[i] - 'A' + deslocamento) % 26;   
             }
             else
             {
-                palavra[i] = frase[i] + delta;
+                cifrado[i] = 'a' + (frase[i] - 'a' + deslocamento) % 26;
             }
         }
         else
+        cifrado[i] = frase[i];
+    }    
+}
+// Funcao main que conjuga tudo junto
+int main()
+{
+    int freq[26] = {0};
+    int deslocamento = 1;
+    float min = FLT_MAX;
+    char frase[10000] = {0}, cifrado[10000] = {0};
+    if (fgets (frase, 10000, stdin) == NULL)
+    {
+        return -1;
+    }
+    // Retirar o ENTER dado pelo fgets;
+    frase[strcspn(frase, "\n")] = '\0';
+
+    for (int i = 0; i < 26; i++)
+    {
+        cifraCeaser(frase, i, cifrado);
+        contaLetras(cifrado, freq);
+        float atual = calculaParcial(freq);
+        if (atual < min)
         {
-            palavra[i] = frase[i];
+            min = atual;
+            deslocamento = i;
         }
     }
-    printf("%d %s\n", delta, palavra);
+    cifraCeaser(frase, deslocamento, cifrado);
+    printf("%i %s\n", deslocamento, cifrado);
     return 0;
 }
