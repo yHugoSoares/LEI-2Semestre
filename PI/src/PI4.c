@@ -15,12 +15,17 @@ int contaVogais (char *s)
     return count;
 }
 
+int duplicaVogais (char *s)
+{
+    
+}
+
 int retiraVogaisRep (char *s)
 {
     int j = 0, count = 0;
     for (long unsigned int i = 0; s[i] != '\0'; i++)
     {
-        if ((s[i+1] != s[i]) && (s[i] != 'a' || s[i] != 'e' || s[i] != 'i' || s[i] != 'o' || s[i] != 'u'))
+        if ((s[i+1] != s[i]) || (s[i] != 'a' && s[i] != 'e' && s[i] != 'i' && s[i] != 'o' && s[i] != 'u'))
         {
             s[j++] = s[i];
         }   
