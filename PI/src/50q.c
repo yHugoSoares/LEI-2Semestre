@@ -2,45 +2,42 @@
 #include <string.h>
 #include <math.h>
 
-int q1(int *v, int size)
+
+void q1()
 {
+    int v[100], n = 0, count = 0;
     int resultado = v[0];
-    for (int i = 1; i < size; i++)
+    printf("Insira numeros inteiros (0 para terminar)\n");
+    while (1)
     {
-        if (v[i] > resultado)
+        assert(scanf("%d", &n) == 1);
+        if (n == 0)
         {
-            resultado = v[i];
+            break;
+        }
+        else count += 1;
+        for (int i = 0; i < count; i++)
+        {
+            if (resultado < v[i])
+            {
+                resultado = v[i];
+            }
         }
     }
-    return resultado;
+    printf("Maior: %d\n", resultado);
 }
 
-float q2(int *v, int size)
+void q2() 
 {
-    float soma, media = 0;
-    for (int i = 0; i < size; i++)
+    double soma = 0;
+    int num, n = 0;
+    while(1) 
     {
-        soma += v[i];
+        assert(scanf("%d",&num) == 1);
+        if(num == 0) break;
+        soma += num;
+        n++;
     }
-    media = soma / size;
-    return media;
-}
-
-int main()
-{
-    int count1 = 0, maior[100], num;
-    while (scanf("%i", &num) && num != 0)
-    {
-        maior[count1++] = num;
-    }
-    printf("%i\n", q1(maior, count1));
-    
-    int count2 = 0, media[100], no;
-    while (scanf("%i", &no) && no != 0)
-    {
-        media[count2++] = no;
-    }
-    printf("%f\n", q2(media, count2));
-    
-    return 0;
+    double media = soma / n;
+    printf("Média: %.5f\n", media);
 }
