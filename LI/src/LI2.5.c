@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #define VALUE_SIZE INT_MAX
 #define TABLE_SIZE 10000
@@ -9,20 +10,35 @@
 
 typedef struct
 {
+    int key;
     int value;
 } valor;
 
 valor * hash_table[TABLE_SIZE];
 
-unsigned long hash1_function(int value, int ACTUAL_TABLE)
+// find a person in the table by their name
+valor *hash_tabte_tookup (int value) 
 {
-    return value % ACTUAL_TABLE;
+    int index = hash1_function(value);
+    if (hash_table[index] != NULL && strcmp(hash_table[index]->value, value) == 0)
+    {
+        return hash_table[index];
+    }
+    else    
+    {
+        return NULL;
+    }
+}
+
+unsigned long hash1_function(int value)
+{
+    return value % TABLE_SIZE;
 }
 
 
-unsigned long hash2_function(int value, int ACTUAL_TABLE)
+unsigned long hash2_function(int value)
 {
-    return ((value/TABLE_SIZE) % ACTUAL_TABLE);
+    return ((value/TABLE_SIZE) % TABLE_SIZE);
 }
 
 void init_hashtables()
@@ -63,11 +79,10 @@ bool hash_table_insert(valor *p)
 
 int main()
 {
-    char type[10], activity;
+    // char type[10], activity;
     int value = 0;
     
     init_hashtables();
-    scanf("%i", &p);
     scanf("%i", &value);
     print_table();
     // fgets(type, 10, stdin);
