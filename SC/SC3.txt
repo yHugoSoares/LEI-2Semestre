@@ -3,21 +3,23 @@ SC3
 1.
 a. Falsa. Correção: O sistema numérico decimal é posicional, assim como o sistema binário, que também é posicional.
 b. Falsa. Correção: O sistema binário utiliza algarismos binários, também conhecidos como bits.
-c. Falsa. Correção: Para representar 8.000 símbolos, são necessários pelo menos 13 bits, já que 2^13 = 8.192.
-d. Verdadeira.
+c. Verdadeira.
+d. Verdadeira e falsa, se decimal verdadeira, e se for compl. falsa
 e. Verdadeira.
-f. Falsa. Correção: As representações de números positivos em complemento para um e em complemento para dois são diferentes.
-g. Verdadeira.
+f. Verdadeiro.
+g. Falsa. Correção: Não pode dar overflow, Impossivel pois o numero mais alto positivo mais o menor negativo nunca vai conseguir um overflow.
 
 2.
 a. 	1000010 - base 2
-	132 - base 7
+	123 - base 7
 	46 - base 15
 
 b.	10*13^2+11*13+7*13^0 = 1690+143+7 = 1840 base 10
+
 	11100110000 - base 2 1024+512+256+32+16
 	12304 - base 6 6^4+2*6^3+3*6^2+4
 	3460 - base 8 3*8^3+4*8^2+6*8
 
 3.
-a.	
+a.	x x x x x 
+	4 9 A 5 3 = 99999
