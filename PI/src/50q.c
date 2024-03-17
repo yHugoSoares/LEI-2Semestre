@@ -64,7 +64,6 @@ int bitsUm (unsigned int n)
         if (n % 2 == 1)
         {
             counter++;
-            n = n / 2;
         }
         n = n / 2;
     }
