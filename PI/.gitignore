@@ -3,7 +3,8 @@
 *.d
 
 # Directories
-./**/bin/
+# ignore bin directories
+bin/
 
 # Object files
 *.o
