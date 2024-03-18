@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+<<<<<<< HEAD
 #include <assert.h>
 #include <stdbool.h>
 
@@ -76,6 +77,24 @@ bool hash_table_insert(valor *p)
     hash_table[index] = p;
     return true;
 }
+=======
+#include <math.h>
+
+#define CAPACITY 50000 // Size of the HashTable.
+
+unsigned long hash_function(char* str)
+{
+    unsigned long i = 0;
+
+    for (int j = 0; str[j]; j++)
+        i += str[j];
+
+    return i % CAPACITY;
+}
+
+
+
+>>>>>>> 9897e862ba81119aaad2327f6ecf3baf9d077224
 
 int main()
 {

@@ -84,53 +84,11 @@ int trailingZ (unsigned int n)
     return counter;
 }
 
-int qDig (unsigned int n)
-{
-    int counter = 0;
-    while (n > 9)
-    {
-        counter++;
-        n /= 10;
-    }
-    
-    return counter + 1;
-}
-
-char *strcat2 (char s1[], char s2[])
-{
-    char sUnited[strlen(s1) + strlen(s2) + 1];
-    for (long unsigned int i = 0; i < strlen(s1); i++)
-    {
-        sUnited[i] = s1[i];
-    }
-    for (long unsigned int i = strlen(s1); i < strlen(s1) + strlen(s2); i++)
-    {
-        sUnited[i] = s2[i];
-    }
-    sUnited[strlen(s1) + strlen(s2)] = '\0';
-    return sUnited;
-}
-
-
 int main()
 {
-    // int n1 = 0;
-    // scanf("%i", &n1);
-    // printf("Numero de bits 1: %i\n", bitsUm(n1));
-
-    // int n2 = 0;
-    // scanf("%i", &n2);
-    // printf("Numero de bits 0: %i\n", trailingZ(n2));
-
-    // int n3 = 0;
-    // scanf("%i", &n3);
-    // printf("Numero de digitos: %i\n", qDig(n3));
-
-    char s1[100], s2[100];
-    fgets(s1, 100, stdin);
-    fgets(s2, 100, stdin);
-    printf("String concatenada: %s\n", strcat2(s1, s2));
-
+    int n = 0;
+    scanf("%i", &n);
+    printf("Numero de bits 1: %i\n", bitsUm(n));
 
     return 0;
 }
