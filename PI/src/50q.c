@@ -142,23 +142,38 @@ int strcmpV2 (char s1[], char s2[])
 
 char *strstrV2 (char s1[], char s2[])
 {
-    int counter = 0;
-    for (long unsigned int i = 0; i < strlen(s1); i++)
+    long unsigned int counter = 0;
+    for (int i = 0; s1[i] != '\0' ; i++)
     {
         if (s1[i] == s2[counter])
         {
             counter++;
+            if (counter == strlen(s2))
+            {
+                return &s1[i - counter + 1];
+            }
         }
         else
         {
             counter = 0;
         }
     }
-    if (counter == 0)
+    return NULL;
+}
+
+char *strstrWorking (char haystack[], char needle[]) 
+{
+    int Nh, Nn, found;
+    for(Nh = 0; haystack[Nh]; Nh++) 
     {
-        return NULL;
+        found = 1;
+        for (Nn = 0; needle[Nn]; Nn++)
+            if (needle[Nn] != haystack[Nh + Nn])
+                found = 0;
+        if (found == 1) break;
     }
-    else return s2;
+    if(found == 1) return haystack + Nh;
+    return NULL;
 }
 
 void strrev (char s[])
@@ -167,10 +182,47 @@ void strrev (char s[])
     char sReversed[strlen(s)];
     for (long unsigned int i = strlen(s); i > 0; i--)
     {
-        sReversed[counter] = s[i];
+        sReversed[counter++] = s[i - 2];
     }
+    printf("%s\n", sReversed);
 }
 
+void truncW (char t[], int n)
+{
+    int counter = 0;
+    char tTruncated[strlen(t)];
+    for (int i = 0; t[i] != '\0'; i++)
+    {
+        while (i < n)
+        {
+            
+        }
+        
+        if (t[i] == ' ')
+        {
+            i = 0;
+            tTruncated[counter++] = t[i];
+        }
+        else tTruncated[counter++] = t[i];
+    }
+
+    printf("%s\n", tTruncated);
+}
+
+void strnoV (char s[])
+{
+    char sNoV[strlen(s)];
+    int counter = 0;
+    for (long unsigned int i = 0; i < strlen(s); i++)
+    {
+        if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U')
+        {
+
+        }
+        else sNoV[counter++] = s[i];
+    }
+    printf("%s\n", sNoV);
+}
 
 int main()
 {
@@ -201,14 +253,23 @@ int main()
     // printf("Comparacao: %i\n", strcmpV2(s1, s2));
 
     // char s1[100], s2[100];
-    // fgets(s1, 100, stdin);
-    // fgets(s2, 100, stdin);
+    // scanf("%s", s1);
+    // scanf("%s", s2);
     // printf("String encontrada: %s\n", strstrV2(s1, s2));
 
-    char s[100];
-    fgets(s, 100, stdin);
-    strrev(s);
-    printf("%s", s);
+    // char s[100];
+    // fgets(s, 100, stdin);
+    // strrev(s);
+
+    char t[100];
+    int n = 0;
+    fgets(t, 100, stdin);
+    scanf("%i", &n);
+    truncW(t, n);
+
+    // char s[100];
+    // fgets(s, 100, stdin);
+    // strnoV(s);
 
     return 0;
 }
