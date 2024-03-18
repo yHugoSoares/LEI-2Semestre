@@ -96,7 +96,7 @@ int qDig (unsigned int n)
     return counter + 1;
 }
 
-char *strcat (char s1[], char s2[])
+char *strcatV2 (char s1[], char s2[])
 {
     char sUnited[strlen(s1) + strlen(s2)];
     for (long unsigned int i = 0; i < strlen(s1); i++)
@@ -107,7 +107,68 @@ char *strcat (char s1[], char s2[])
     {
         sUnited[i] = s2[i];
     }
-    return sUnited;
+    return fgets(sUnited, sizeof(sUnited), stdout);
+}
+
+char *strcpyV2 (char *dest, char source[])
+{
+    for (long unsigned int i = 0; i < strlen(source); i++)
+    {
+        dest[i] = source[i];
+    }
+    return dest;
+}
+
+int strcmpV2 (char s1[], char s2[])
+{
+    int sum = 0;
+    for (long unsigned int i = 0; i < strlen(s1); i++)
+    {
+        if (s1[i]  == s2[i])
+        {
+            sum = 0;
+        }
+        else if (s1[i] > s2[i])
+        {
+            sum += s1[i] - s2[i];
+        }
+        else
+        {
+            sum += s2[i] - s1[i];
+        }
+    }
+    return sum;
+}
+
+char *strstrV2 (char s1[], char s2[])
+{
+    int counter = 0;
+    for (long unsigned int i = 0; i < strlen(s1); i++)
+    {
+        if (s1[i] == s2[counter])
+        {
+            counter++;
+        }
+        else
+        {
+            counter = 0;
+        }
+    }
+    if (counter == 0)
+    {
+        return NULL;
+    }
+    else return s2;
+}
+
+void strrev (char s[])
+{
+    int counter = 0;
+    char sReversed[strlen(s)];
+    for (long unsigned int i = strlen(s); i > 0; i--)
+    {
+        sReversed[counter] = s[i];
+    }
 }
 
 
@@ -125,11 +186,29 @@ int main()
     // scanf("%i", &n3);
     // printf("Numero de digitos: %i\n", qDig(n3));
 
-    char s1[100], s2[100];
-    fgets(s1, 100, stdin);
-    fgets(s2, 100, stdin);
-    printf("String concatenada: %s\n", strcat(s1, s2));
+    // char s1[100], s2[100];
+    // fgets(s1, 100, stdin);
+    // fgets(s2, 100, stdin);
+    // printf("String concatenada: %s\n", strcatV2(s1, s2));
 
+    // char source[100], dest[100];
+    // fgets(source, 100, stdin);
+    // printf("String copiada: %s\n", strcpy(dest, source));
+
+    // char s1[100], s2[100];
+    // fgets(s1, 100, stdin);
+    // fgets(s2, 100, stdin);
+    // printf("Comparacao: %i\n", strcmpV2(s1, s2));
+
+    // char s1[100], s2[100];
+    // fgets(s1, 100, stdin);
+    // fgets(s2, 100, stdin);
+    // printf("String encontrada: %s\n", strstrV2(s1, s2));
+
+    char s[100];
+    fgets(s, 100, stdin);
+    strrev(s);
+    printf("%s", s);
 
     return 0;
 }
