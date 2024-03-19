@@ -222,7 +222,6 @@ void strnoV (char s[])
     printf("%s\n", sNoV);
 }
 
-<<<<<<< HEAD
 int freqC(char ch, char s[]) 
 {
     int i, freq = 0;
@@ -332,8 +331,6 @@ int sufPref (char s1[], char s2[])
     return N2;
 }
 
-
-=======
 #define max(a, b) (a > b ? a : b)
 int unionMSet (int N, int v1[N], int v2[N], int r[N])
 {
@@ -356,7 +353,7 @@ int cardinalMSet (int N, int v[N])
     return sum;
 }
 
->>>>>>> f3fdcfb (c)
+
 int main()
 {
     // int n1 = 0;
