@@ -190,23 +190,21 @@ void strrev (char s[])
 void truncW (char t[], int n)
 {
     int counter = 0;
-    char tTruncated[strlen(t)];
     for (int i = 0; t[i] != '\0'; i++)
     {
-        while (i < n)
+        if (i == ' ')
         {
             
         }
         
-        if (t[i] == ' ')
+        for (int j = 0; j < n; j++)
         {
-            i = 0;
-            tTruncated[counter++] = t[i];
+            t[counter++] = t[j+i];
         }
-        else tTruncated[counter++] = t[i];
     }
-
-    printf("%s\n", tTruncated);
+    
+    
+    
 }
 
 void strnoV (char s[])
@@ -224,6 +222,7 @@ void strnoV (char s[])
     printf("%s\n", sNoV);
 }
 
+<<<<<<< HEAD
 int freqC(char ch, char s[]) 
 {
     int i, freq = 0;
@@ -334,6 +333,30 @@ int sufPref (char s1[], char s2[])
 }
 
 
+=======
+#define max(a, b) (a > b ? a : b)
+int unionMSet (int N, int v1[N], int v2[N], int r[N])
+{
+    int sum = 0;
+    for (int i = 0; v1[i] != '\0' ; i++)
+    {
+        r[i] = max(v1[i], v2[i]);
+        sum += r[i];
+    }
+    return sum;
+}
+
+int cardinalMSet (int N, int v[N])
+{
+    int sum = 0;
+    for (int i = 0; v[i] != '\0' ; i++)
+    {
+        sum += v[i];
+    }
+    return sum;
+}
+
+>>>>>>> f3fdcfb (c)
 int main()
 {
     // int n1 = 0;
@@ -371,11 +394,19 @@ int main()
     // fgets(s, 100, stdin);
     // strrev(s);
 
+<<<<<<< HEAD
     // char t[100];
     // int n = 0;
     // fgets(t, 100, stdin);
     // scanf("%i", &n);
     // truncW(t, n);
+=======
+    char t[1000];
+    int n = 0;
+    fgets(t, 100, stdin);
+    scanf("%i", &n);
+    truncW(t, n);
+>>>>>>> f3fdcfb (c)
 
     // char s[100];
     // fgets(s, 100, stdin);
