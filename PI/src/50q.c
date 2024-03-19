@@ -328,6 +328,71 @@ int sufPref (char s1[], char s2[])
     return N2;
 }
 
+int contaPal (char s[])
+{
+    int counter = 0;
+    if (s[0] != ' ')
+    {
+        counter++;
+    }
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] == ' ' && s[i + 1] != ' ')
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+int contaVogais (char s[])
+{
+    int counter = 0;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U')
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+int contida (char a[], char b[])
+{
+    long unsigned int j = 0;
+    for (int i = 0; b[i] != '\0'; i++)
+    {
+        if (a[j] == b[i])
+        {
+            j++;
+        }
+    }
+    if (j == strlen(a))
+    {
+        return 1;
+    }
+    else return 0;
+}
+
+int remRep (char x[])
+{
+    int j = 0, counter = 0;
+    for (int i = 0; x[i] != '\0'; i++)
+    {
+        if (x[i] == x[i+1])
+        {
+            x[j] = x[i];
+        }
+        else
+        {
+            x[j++] = x[i];
+            counter++;
+        }
+    }
+    return counter;
+}
+
 #define max(a, b) (a > b ? a : b)
 int unionMSet (int N, int v1[N], int v2[N], int r[N])
 {
@@ -348,6 +413,23 @@ int cardinalMSet (int N, int v[N])
         sum += v[i];
     }
     return sum;
+}
+
+int palindorome (char s[])
+{
+    long unsigned int j = strlen(s) - 1, counter = 0;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] == s[j--])
+        {
+            counter++;
+        }
+    }
+    if (counter == strlen(s))
+    {
+        return 1;
+    }
+    else return 0;    
 }
 
 
@@ -394,11 +476,11 @@ int main()
     // scanf("%i", &n);
     // truncW(t, n);
 
-    char t[1000];
-    int n = 0;
-    fgets(t, 100, stdin);
-    scanf("%i", &n);
-    truncW(t, n);
+    // char t[1000];
+    // int n = 0;
+    // fgets(t, 100, stdin);
+    // scanf("%i", &n);
+    // truncW(t, n);
 
     // char s[100];
     // fgets(s, 100, stdin);
@@ -426,10 +508,39 @@ int main()
     // fgets(s2, 100, stdin);
     // printf("Maior sufixo: %i\n", maiorSufixo(s1, s2));
 
-    char s1[100], s2[100];
-    scanf("%s", s1);
-    scanf("%s", s2);
-    printf("Sufixo prefixo: %i\n", sufPref(s1, s2));
+    // char s1[100], s2[100];
+    // scanf("%s", s1);
+    // scanf("%s", s2);
+    // printf("Sufixo prefixo: %i\n", sufPref(s1, s2));
+
+    // char s[100];
+    // fgets(s, 100, stdin);
+    // printf("Numero de palavras: %i\n", contaPal(s));
+
+    // char s[100];
+    // fgets(s, 100, stdin);
+    // printf("Numero de vogais: %i\n", contaVogais(s));
+
+    // char a[100], b[100];
+    // fgets(a, 100, stdin);
+    // fgets(b, 100, stdin);
+    // if (contida(a, b) == 1)
+    // {
+    //     printf("Verdadeiro\n");
+    // }
+    // else printf("False\n");
+
+    // char s[100];
+    // scanf("%s", s);
+    // if (palindorome(s) == 1)
+    // {
+    //     printf("Verdadeiro\n");
+    // }
+    // else printf("False\n");
+    
+    char s[100];
+    scanf("%s", s);
+    printf("%d %s\n", remRep(s), s);
 
     return 0;
 }
