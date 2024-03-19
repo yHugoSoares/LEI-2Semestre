@@ -202,9 +202,6 @@ void truncW (char t[], int n)
             t[counter++] = t[j+i];
         }
     }
-    
-    
-    
 }
 
 void strnoV (char s[])
@@ -391,19 +388,17 @@ int main()
     // fgets(s, 100, stdin);
     // strrev(s);
 
-<<<<<<< HEAD
     // char t[100];
     // int n = 0;
     // fgets(t, 100, stdin);
     // scanf("%i", &n);
     // truncW(t, n);
-=======
+
     char t[1000];
     int n = 0;
     fgets(t, 100, stdin);
     scanf("%i", &n);
     truncW(t, n);
->>>>>>> f3fdcfb (c)
 
     // char s[100];
     // fgets(s, 100, stdin);
