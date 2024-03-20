@@ -573,6 +573,34 @@ void somasAc (int v[], int Ac [], int N)
     printf("\n");
 }
 
+int triSup (int N, float m [N][N]) 
+{
+    int i, j, x = 1;
+    for(i = 0; i < N; i++) 
+    {
+        for(j = 0; j < i; j++) 
+        {
+            if(m[i][j]) x = 0;
+        }
+    }
+    return x;
+}
+
+void transposta (int N, float m [N][N])
+{
+    int i, j;
+    float temp;
+    for(i = 0; i < N; i++) 
+    {
+        for(j = 0; j < i; j++) 
+        {
+            temp = m[i][j];
+            m[i][j] = m[j][i];
+            m[j][i] = temp;
+        }
+    }
+}
+
 int cardinalMSet (int N, int v[N])
 {
     int sum = 0;
@@ -739,8 +767,11 @@ int main()
     // int b[5] = {2, 5, 6, 8, 9};
     // printf("%i\n", comunsOrd(a, 6, b, 5));
 
-    int v[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9}, Ac[100];
-    somasAc(v, Ac, 10);
+    // int v[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9}, Ac[100];
+    // somasAc(v, Ac, 10);
+
+    float m[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    transposta(3, m);
 
     return 0;
 }
