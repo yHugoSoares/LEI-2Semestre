@@ -405,6 +405,68 @@ int unionMSet (int N, int v1[N], int v2[N], int r[N])
     return sum;
 }
 
+int limpaEspacos (char t[])
+{
+    int j = 0;
+    for (int i = 0; t[i] != '\0'; i++)
+    {
+        if (t[i] != ' ')
+        {
+            t[j++] = t[i];
+        }
+        
+    }
+    return j - 1;
+}
+
+void insere (int v[], int N, int x)
+{
+    for (int i = 0; v[i] != '\0'; i++)
+    {
+        if (x <= v[i])
+        {
+            v[i] = x;
+            while (v[i] != '\0')
+            {
+                v[i+1] = v[i];
+                i++;
+            }
+        }
+    }
+    N += 1;
+}
+
+void merge (int r [], int a[], int b[], int na, int nb)
+{
+    for (int i = 0; i < na; i++)
+    {
+        r[i] = a[i];
+    }
+    for (int i = na; i < nb; i++)
+    {
+        r[i] = b[i];
+    }
+    printf("{");
+    for (int i = 0; r[i] != '\0'; i++)
+    {
+        
+        printf("%i,", r[i]);
+    }
+    printf("}\n");
+}
+
+int crescente (int a[], int i, int j)
+{
+    for (i = i; i <= j; i++)
+    {
+        if (a[i] > a[i+1])
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int cardinalMSet (int N, int v[N])
 {
     int sum = 0;
@@ -538,9 +600,34 @@ int main()
     // }
     // else printf("False\n");
     
-    char s[100];
-    scanf("%s", s);
-    printf("%d %s\n", remRep(s), s);
+    // char s[100];
+    // scanf("%s", s);
+    // printf("%d %s\n", remRep(s), s);
+
+    // int v1[100], v2[100], r[100];
+    // for (int i = 0; i < 100; i++)
+    // {
+    //     scanf("%i", &v1[i]);
+    //     scanf("%i", &v2[i]);
+    //     if (v1[i] == 0 && v2[i] == 0)
+    //     {
+    //         break;
+    //     }
+    // }
+    // merge(r, v1, v2, 100, 100);
+
+    // int a[100], i = 0, j = 0;
+    // for (int i = 0; i < 100; i++)
+    // {
+    //     scanf("%i", &a[i]);
+    //     if (a[i] == 0)
+    //     {
+    //         break;
+    //     }
+    // }
+    // scanf("%i", &i);
+    // scanf("%i", &j);
+    // printf("%i\n", crescente(a, i, j));
 
     return 0;
 }
