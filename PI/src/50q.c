@@ -467,6 +467,20 @@ int crescente (int a[], int i, int j)
     return 1;
 }
 
+int retiraNeg (int v[], int N)
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (v[i] < 0)
+        {
+            v[i] = v[i + 1];
+            N--;
+        }
+        
+    }
+    return N;
+}
+
 int cardinalMSet (int N, int v[N])
 {
     int sum = 0;
