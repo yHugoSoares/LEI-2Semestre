@@ -481,6 +481,98 @@ int retiraNeg (int v[], int N)
     return N;
 }
 
+
+char CharmenosFreq(char s[]) 
+{
+    char menosFreq = 0;
+    int i, freqMin = 0, freq;
+    for(i = 0; s[i]; i++) 
+    {
+        if((freq = freqC(s[i],s)) < freqMin) 
+        {
+            freqMin = freq;
+            menosFreq = s[i];
+        }
+    }
+    return menosFreq;
+}
+
+int elimRep (int v[], int n)
+{
+    int elim = 0;
+    for (int i = 0; i <= n; i++)
+    {
+        elim = v[i];
+        for (int j = i + 1; v[i] != '\0'; i++)
+        {
+            if (v[j] == elim)
+            {
+                v[j] = v[j - 100];
+                n--;
+            }
+        }
+    }
+    return n;
+}
+
+int elimRepOrd (int v[], int n)
+{
+    for (int i = 0; i <= n; i++)
+    {
+        if (v[i] == v[i + 1])
+        {
+            v[i+1] = v[i];
+            n--;
+        }
+    }
+    return *v;
+}
+
+int comunsOrd (int a[], int na, int b[], int nb) 
+{
+    int i = 0, j = 0, ans = 0;
+    while(i < na && j < nb) 
+    {
+        if(a[i] == b[j]) 
+        {
+            ans++;
+            i++;
+            j++;
+        }
+        else if(a[i] > b[j]) j++;
+        else i++;
+    }
+    return ans;
+}
+
+int minInd (int v[], int n)
+{
+    int index = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (v[index] < v[i])
+        {
+            index = i;
+        }
+    }
+    return index;
+}
+
+void somasAc (int v[], int Ac [], int N)
+{
+    int sum = 0;
+    for (int i = 0; i < N; i++)
+    {
+        sum += v[i];
+        Ac[i] = sum;
+    }
+    for (int i = 0; i < N - 1; i++)
+    {
+        printf("%i, ", Ac[i]);
+    }
+    printf("\n");
+}
+
 int cardinalMSet (int N, int v[N])
 {
     int sum = 0;
@@ -642,6 +734,13 @@ int main()
     // scanf("%i", &i);
     // scanf("%i", &j);
     // printf("%i\n", crescente(a, i, j));
+
+    // int a[6] = {1, 2, 4, 6, 7, 9};
+    // int b[5] = {2, 5, 6, 8, 9};
+    // printf("%i\n", comunsOrd(a, 6, b, 5));
+
+    int v[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9}, Ac[100];
+    somasAc(v, Ac, 10);
 
     return 0;
 }
