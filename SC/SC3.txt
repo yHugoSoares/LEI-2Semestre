@@ -23,3 +23,11 @@ b.	10*13^2+11*13+7*13^0 = 1690+143+7 = 1840 base 10
 3.
 a.	x x x x x 
 	4 9 A 5 3 = 99999
+
+
+5.
+a. 	The exponent is encoded in an excess format. The bias value is a number near the middle of therange of possible values that is selected 	to represent zero. The bias typically equals 2^(k-1)-1 ,where k is the number of bits in the exponent. Ou seja bias = 2^(6-1)-1 = 2⁵-1 =	32-1 = 31
+
+b. 	2FE0 base 16 = 12256 base 10
+
+c.	
