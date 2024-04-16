@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#define Max 6
+#define Max 10
 
 typedef struct staticQueue {
     int front;
@@ -64,7 +64,24 @@ int Sfront (SQueue q, int *x)
     return 0;
 }
 
-int dupQueue(dinQueue q1)
+int dupQueue(DQueue q)
+{
+    q->size *= 2; // Double the size of the queue
+    
+    int *values = realloc(q->values, sizeof(int) * q->size); // Reallocate memory for the values array
+    
+    if (values == NULL) return 1;
+    
+    int i, k;
+    for (i = q->length - 1, k = q->size - 1; i >= q->front; i--, k--)
+    {
+        values[k] = values[i];
+        q->front = k + 1;
+    }
+    
+}
+
+DQueue DinitQueue()
 {
     DQueue q = malloc(sizeof(struct dinQueue)); // Allocate memory for the QUEUE struct
     if (q == NULL) return NULL;
@@ -79,10 +96,34 @@ int dupQueue(dinQueue q1)
         free(q);
         return NULL;
     }
+    return q;
+}
+
+int Denqueue(DQueue q, int x)
+{
+    if(q->length == q->size) 
+    {
+        if (dupQueue(q) != 0) return 1;
+    }
+
+    q->values[(q->front + q->length) % q->size] = x;
+    q->length++;
+    
+    return 0;
+}
+
+int Ddequeue(DQueue q, int x)
+{
+    if (q->length == 0) return 1;
+
+    x = q->values[q->front];
+    q->front = (q->front + 1) % q->size;
+    q->length--;
+
+    return 0;
 }
 
 int main()
 {
-    SinitQueue();
     return 0;
 }
