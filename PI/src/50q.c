@@ -190,23 +190,18 @@ void strrev (char s[])
 void truncW (char t[], int n)
 {
     int counter = 0;
-    char tTruncated[strlen(t)];
     for (int i = 0; t[i] != '\0'; i++)
     {
-        while (i < n)
+        if (i == ' ')
         {
             
         }
         
-        if (t[i] == ' ')
+        for (int j = 0; j < n; j++)
         {
-            i = 0;
-            tTruncated[counter++] = t[i];
+            t[counter++] = t[j+i];
         }
-        else tTruncated[counter++] = t[i];
     }
-
-    printf("%s\n", tTruncated);
 }
 
 void strnoV (char s[])
@@ -333,6 +328,309 @@ int sufPref (char s1[], char s2[])
     return N2;
 }
 
+<<<<<<< HEAD
+=======
+int contaPal (char s[])
+{
+    int counter = 0;
+    if (s[0] != ' ')
+    {
+        counter++;
+    }
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] == ' ' && s[i + 1] != ' ')
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+int contaVogais (char s[])
+{
+    int counter = 0;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U')
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+
+int contida (char a[], char b[])
+{
+    long unsigned int j = 0;
+    for (int i = 0; b[i] != '\0'; i++)
+    {
+        if (a[j] == b[i])
+        {
+            j++;
+        }
+    }
+    if (j == strlen(a))
+    {
+        return 1;
+    }
+    else return 0;
+}
+
+int remRep (char x[])
+{
+    int j = 0, counter = 0;
+    for (int i = 0; x[i] != '\0'; i++)
+    {
+        if (x[i] == x[i+1])
+        {
+            x[j] = x[i];
+        }
+        else
+        {
+            x[j++] = x[i];
+            counter++;
+        }
+    }
+    return counter;
+}
+
+#define max(a, b) (a > b ? a : b)
+int unionMSet (int N, int v1[N], int v2[N], int r[N])
+{
+    int sum = 0;
+    for (int i = 0; v1[i] != '\0' ; i++)
+    {
+        r[i] = max(v1[i], v2[i]);
+        sum += r[i];
+    }
+    return sum;
+}
+
+int limpaEspacos (char t[])
+{
+    int j = 0;
+    for (int i = 0; t[i] != '\0'; i++)
+    {
+        if (t[i] != ' ')
+        {
+            t[j++] = t[i];
+        }
+        
+    }
+    return j - 1;
+}
+
+void insere (int v[], int N, int x)
+{
+    for (int i = 0; v[i] != '\0'; i++)
+    {
+        if (x <= v[i])
+        {
+            v[i] = x;
+            while (v[i] != '\0')
+            {
+                v[i+1] = v[i];
+                i++;
+            }
+        }
+    }
+    N += 1;
+}
+
+void merge (int r [], int a[], int b[], int na, int nb)
+{
+    for (int i = 0; i < na; i++)
+    {
+        r[i] = a[i];
+    }
+    for (int i = na; i < nb; i++)
+    {
+        r[i] = b[i];
+    }
+    printf("{");
+    for (int i = 0; r[i] != '\0'; i++)
+    {
+        
+        printf("%i,", r[i]);
+    }
+    printf("}\n");
+}
+
+int crescente (int a[], int i, int j)
+{
+    for (i = i; i <= j; i++)
+    {
+        if (a[i] > a[i+1])
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int retiraNeg (int v[], int N)
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (v[i] < 0)
+        {
+            v[i] = v[i + 1];
+            N--;
+        }
+        
+    }
+    return N;
+}
+
+
+char CharmenosFreq(char s[]) 
+{
+    char menosFreq = 0;
+    int i, freqMin = 0, freq;
+    for(i = 0; s[i]; i++) 
+    {
+        if((freq = freqC(s[i],s)) < freqMin) 
+        {
+            freqMin = freq;
+            menosFreq = s[i];
+        }
+    }
+    return menosFreq;
+}
+
+int elimRep (int v[], int n)
+{
+    int elim = 0;
+    for (int i = 0; i <= n; i++)
+    {
+        elim = v[i];
+        for (int j = i + 1; v[i] != '\0'; i++)
+        {
+            if (v[j] == elim)
+            {
+                v[j] = v[j - 100];
+                n--;
+            }
+        }
+    }
+    return n;
+}
+
+int elimRepOrd (int v[], int n)
+{
+    for (int i = 0; i <= n; i++)
+    {
+        if (v[i] == v[i + 1])
+        {
+            v[i+1] = v[i];
+            n--;
+        }
+    }
+    return *v;
+}
+
+int comunsOrd (int a[], int na, int b[], int nb) 
+{
+    int i = 0, j = 0, ans = 0;
+    while(i < na && j < nb) 
+    {
+        if(a[i] == b[j]) 
+        {
+            ans++;
+            i++;
+            j++;
+        }
+        else if(a[i] > b[j]) j++;
+        else i++;
+    }
+    return ans;
+}
+
+int minInd (int v[], int n)
+{
+    int index = 0;
+    for (int i = 0; i < n; i++)
+    {
+        if (v[index] < v[i])
+        {
+            index = i;
+        }
+    }
+    return index;
+}
+
+void somasAc (int v[], int Ac [], int N)
+{
+    int sum = 0;
+    for (int i = 0; i < N; i++)
+    {
+        sum += v[i];
+        Ac[i] = sum;
+    }
+    for (int i = 0; i < N - 1; i++)
+    {
+        printf("%i, ", Ac[i]);
+    }
+    printf("\n");
+}
+
+int triSup (int N, float m [N][N]) 
+{
+    int i, j, x = 1;
+    for(i = 0; i < N; i++) 
+    {
+        for(j = 0; j < i; j++) 
+        {
+            if(m[i][j]) x = 0;
+        }
+    }
+    return x;
+}
+
+void transposta (int N, float m [N][N])
+{
+    int i, j;
+    float temp;
+    for(i = 0; i < N; i++) 
+    {
+        for(j = 0; j < i; j++) 
+        {
+            temp = m[i][j];
+            m[i][j] = m[j][i];
+            m[j][i] = temp;
+        }
+    }
+}
+
+int cardinalMSet (int N, int v[N])
+{
+    int sum = 0;
+    for (int i = 0; v[i] != '\0' ; i++)
+    {
+        sum += v[i];
+    }
+    return sum;
+}
+
+int palindorome (char s[])
+{
+    long unsigned int j = strlen(s) - 1, counter = 0;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] == s[j--])
+        {
+            counter++;
+        }
+    }
+    if (counter == strlen(s))
+    {
+        return 1;
+    }
+    else return 0;    
+}
+
+>>>>>>> 61f1e69da7fff0c8a3dc4725081d8f183e258562
 
 int main()
 {
@@ -376,6 +674,15 @@ int main()
     // fgets(t, 100, stdin);
     // scanf("%i", &n);
     // truncW(t, n);
+<<<<<<< HEAD
+=======
+
+    // char t[1000];
+    // int n = 0;
+    // fgets(t, 100, stdin);
+    // scanf("%i", &n);
+    // truncW(t, n);
+>>>>>>> 61f1e69da7fff0c8a3dc4725081d8f183e258562
 
     // char s[100];
     // fgets(s, 100, stdin);
@@ -403,10 +710,81 @@ int main()
     // fgets(s2, 100, stdin);
     // printf("Maior sufixo: %i\n", maiorSufixo(s1, s2));
 
+<<<<<<< HEAD
     char s1[100], s2[100];
     scanf("%s", s1);
     scanf("%s", s2);
     printf("Sufixo prefixo: %i\n", sufPref(s1, s2));
+=======
+    // char s1[100], s2[100];
+    // scanf("%s", s1);
+    // scanf("%s", s2);
+    // printf("Sufixo prefixo: %i\n", sufPref(s1, s2));
+
+    // char s[100];
+    // fgets(s, 100, stdin);
+    // printf("Numero de palavras: %i\n", contaPal(s));
+
+    // char s[100];
+    // fgets(s, 100, stdin);
+    // printf("Numero de vogais: %i\n", contaVogais(s));
+
+    // char a[100], b[100];
+    // fgets(a, 100, stdin);
+    // fgets(b, 100, stdin);
+    // if (contida(a, b) == 1)
+    // {
+    //     printf("Verdadeiro\n");
+    // }
+    // else printf("False\n");
+
+    // char s[100];
+    // scanf("%s", s);
+    // if (palindorome(s) == 1)
+    // {
+    //     printf("Verdadeiro\n");
+    // }
+    // else printf("False\n");
+    
+    // char s[100];
+    // scanf("%s", s);
+    // printf("%d %s\n", remRep(s), s);
+
+    // int v1[100], v2[100], r[100];
+    // for (int i = 0; i < 100; i++)
+    // {
+    //     scanf("%i", &v1[i]);
+    //     scanf("%i", &v2[i]);
+    //     if (v1[i] == 0 && v2[i] == 0)
+    //     {
+    //         break;
+    //     }
+    // }
+    // merge(r, v1, v2, 100, 100);
+
+    // int a[100], i = 0, j = 0;
+    // for (int i = 0; i < 100; i++)
+    // {
+    //     scanf("%i", &a[i]);
+    //     if (a[i] == 0)
+    //     {
+    //         break;
+    //     }
+    // }
+    // scanf("%i", &i);
+    // scanf("%i", &j);
+    // printf("%i\n", crescente(a, i, j));
+
+    // int a[6] = {1, 2, 4, 6, 7, 9};
+    // int b[5] = {2, 5, 6, 8, 9};
+    // printf("%i\n", comunsOrd(a, 6, b, 5));
+
+    // int v[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9}, Ac[100];
+    // somasAc(v, Ac, 10);
+
+    float m[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    transposta(3, m);
+>>>>>>> 61f1e69da7fff0c8a3dc4725081d8f183e258562
 
     return 0;
 }

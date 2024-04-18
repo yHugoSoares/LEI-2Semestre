@@ -10,7 +10,7 @@ float binaryToFloat(int exponentBits, int mantissaBits, char *binary)
     int indice = 0, exponent = 0, bias = 0;
     float result = 0.0;
     /*  
-    f = mantissa
+    f = mantissa em base 10
     bias = 2^(k-1) - 1
     e = expoent em base 10
     k = n.o. de bits do expoente (E)
