@@ -1,108 +1,88 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-<<<<<<< HEAD
 #include <assert.h>
 #include <stdbool.h>
 
+int p;
+
 #define VALUE_SIZE INT_MAX
-#define TABLE_SIZE 10000
-#define ACTUAL_TABLE *p
 
 typedef struct
 {
-    int key;
     int value;
 } valor;
 
-valor * hash_table[TABLE_SIZE];
 
-// find a person in the table by their name
-valor *hash_tabte_tookup (int value) 
-{
-    int index = hash1_function(value);
-    if (hash_table[index] != NULL && strcmp(hash_table[index]->value, value) == 0)
-    {
-        return hash_table[index];
-    }
-    else    
-    {
-        return NULL;
-    }
-}
+
+valor *hash_table1[p];
+valor *hash_table2[p];
+
+void search(int val)  
+{  
+    int key = val % p;  
+    if(hash_table1[key] -> value == val)
+        printf("Search Found\n");  
+    else  
+        printf("Search Not Found\n");  
+}  
 
 unsigned long hash1_function(int value)
 {
-    return value % TABLE_SIZE;
+    return value % p;
 }
 
 
 unsigned long hash2_function(int value)
 {
-    return ((value/TABLE_SIZE) % TABLE_SIZE);
+    return ((value/p) % p);
 }
 
 void init_hashtables()
 {
-    for (int i = 0; i < TABLE_SIZE; i++)
+    for (int i = 0; i < p; i++)
     {
-        hash_table[i] = NULL;
+        hash_table1[i] = NULL;
+        hash_table2[i] = NULL;
     }
     // Initialize hashTable to NULL
 }
 
 void print_table()
 {
-    for (int i = 0; i < TABLE_SIZE; i++)
+    for (int i = 0; i < p; i++)
     {
-        if (hash_table[i] == NULL)
+        if (hash_table1[i] == NULL)
         {
             printf("\t%i\t---\n", i);
         }
-        else printf("%i\n", hash_table[i]->value);
+        else printf("%i\n", hash_table1[i]->value);
     }
 }
 
-bool hash_table_insert(valor *p)
+int hash_table_insert(valor *p)
 {
     if (p == NULL) 
     {
-        return false;
+        return 0;
     }
     int index = hash1_function(p -> value);
-    if (hash_table[index] != NULL)
+    if (hash_table1[index] != NULL)
     {
-        return false;
+        return 0;
     }
-    hash_table[index] = p;
-    return true;
+    hash_table1[index] = p;
+    return 1;
 }
-=======
-#include <math.h>
-
-#define CAPACITY 50000 // Size of the HashTable.
-
-unsigned long hash_function(char* str)
-{
-    unsigned long i = 0;
-
-    for (int j = 0; str[j]; j++)
-        i += str[j];
-
-    return i % CAPACITY;
-}
-
-
-
->>>>>>> 9897e862ba81119aaad2327f6ecf3baf9d077224
 
 int main()
 {
     // char type[10], activity;
     int value = 0;
-    
+    if (scanf("%i", &p) != 1) return -1;
+    ez(p);
     init_hashtables();
-    scanf("%i", &value);
+    if(scanf("%i", &value) != 1) return -1;
     print_table();
     // fgets(type, 10, stdin);
     // scanf("%c", &activity);
