@@ -67,9 +67,21 @@ valor *search_hash_table(int *value)
     else return NULL;
 }
 
+valor *delete_hash_table(int *value)
+{
+    int index = hash_function1(value);
+    if (hash_table1[index] != NULL && hash_table1[index]->value == *value)
+    {
+        valor *tmp = hash_table1[index];
+        hash_table1[index] = NULL;
+        return tmp;
+    }
+    else return NULL;
+}
+
 int main()
 {
-    int v = 10;
+
     init_hash_table();
     valor a = {.value = 5};
     valor b = {.value = 142};
@@ -87,11 +99,12 @@ int main()
 
     print_hash_table();
 
-    valor *tmp = search_hash_table(&v);
+    valor *tmp = search_hash_table(&f.value);
     if (tmp == NULL) printf("Value not found\n");
     else printf("Value found: %i\n", tmp->value);
     
-    tmp = search_hash_table(&f.value);
+    delete_hash_table(&(tmp->value));
+
     if (tmp == NULL) printf("Value not found\n");
     else printf("Value found: %i\n", tmp->value);
 
