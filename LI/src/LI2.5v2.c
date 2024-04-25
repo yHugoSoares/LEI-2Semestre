@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <stdbool.h>
 
-#define TABLE_SIZE 50
+#define TABLE_SIZE 20
 
 typedef struct
 {
@@ -36,24 +36,31 @@ void init_hash_table() // init table empty (NULL)
 int insert_hash_table(valor *v)
 {
     if (v == NULL) return 0;
-    int index = hash_function1(&v->value);
-    if (hash_table1[index] != NULL)
+    int index = hash_function1(&v->value);\
+    if (hash_table1[index]->value == v->value)
     {
-        return 0;
+        return 2;
     }
-    hash_table1[index] = v;
-    return 1;
+    for (int i = 0; i < TABLE_SIZE; i++)
+    {
+        int try = (index + i) % TABLE_SIZE;
+        if (hash_table1[try] == NULL)
+        {
+            hash_table1[try] = v;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void print_hash_table()
 {
     for (int i = 0; i < TABLE_SIZE; i++)
     {
-        if (hash_table1[i] == NULL)
+        if (hash_table1[i] != NULL)
         {
-            printf("\t%i\t---\n", i);
+            printf("%i\t%i\n", i, hash_table1[i]->value);
         }
-        else printf("\t%i\t%i\n", i, hash_table1[i]->value);
     }
 }
 
@@ -67,46 +74,65 @@ valor *search_hash_table(int *value)
     else return NULL;
 }
 
-valor *delete_hash_table(int *value)
+void delete_hash_table(int *value)
 {
     int index = hash_function1(value);
     if (hash_table1[index] != NULL && hash_table1[index]->value == *value)
     {
-        valor *tmp = hash_table1[index];
         hash_table1[index] = NULL;
-        return tmp;
     }
-    else return NULL;
 }
 
 int main()
 {
+    char instr;
+    int value = 0, size_table = 0;
+    if (scanf("%i", size_table) != 1) return -1;
+    while (getchar() != '\n');
+    {
+        if (scanf("%c", &instr) != 1) return -1;
+        if (scanf("%i", &value) != 1) return -1;
+        if (instr == 'I')
+        {
+            if (insert_hash_table(&value)) printf(" -> %i\n", value);
+            else if (insert_hash_table(&value) == 2) printf("%i EXISTS", value);
+            else printf("%i ERROR", value);
+        }
 
-    init_hash_table();
-    valor a = {.value = 5};
-    valor b = {.value = 142};
-    valor c = {.value = 231};
-    valor d = {.value = 476};
-    valor e = {.value = 495};
-    valor f = {.value = 347};
+        if (instr == 'D')
+        {
+            delete_hash_table(&value);
+        }
+
+        if (instr == 'C')
+        {
+            /* code */
+        }
+
+        if (instr == 'P')
+        {
+            print_hash_table();
+        }
+    }
     
-    insert_hash_table(&a);
-    insert_hash_table(&b);
-    insert_hash_table(&c);
-    insert_hash_table(&d);
-    insert_hash_table(&e);
-    insert_hash_table(&f);
-
-    print_hash_table();
-
-    valor *tmp = search_hash_table(&f.value);
-    if (tmp == NULL) printf("Value not found\n");
-    else printf("Value found: %i\n", tmp->value);
     
-    delete_hash_table(&(tmp->value));
+    // init_hash_table();
+    // valor a = {.value = 5};
+    // valor b = {.value = 142};
+    // valor c = {.value = 231};
+    // valor d = {.value = 476};
+    // valor e = {.value = 495};
+    // valor f = {.value = 347};
+    
+    // insert_hash_table(&a);
+    // insert_hash_table(&b);
+    // insert_hash_table(&c);
+    // insert_hash_table(&d);
+    // insert_hash_table(&e);
+    // insert_hash_table(&f);
 
-    if (tmp == NULL) printf("Value not found\n");
-    else printf("Value found: %i\n", tmp->value);
+
+    // print_hash_table();
 
     
 
