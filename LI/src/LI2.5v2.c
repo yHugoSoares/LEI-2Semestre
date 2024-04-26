@@ -87,17 +87,18 @@ int main()
 {
     char instr;
     int value = 0, size_table = 0;
-    if (scanf("%i", size_table) != 1) return -1;
-    while (getchar() != '\n');
+    if (scanf("%i", &size_table) != 1) return -1;
+    if (scanf("%c", &instr) != 1) return -1;
+    while (getchar() != '\n')
     {
-        if (scanf("%c", &instr) != 1) return -1;
-        if (scanf("%i", &value) != 1) return -1;
-        if (instr == 'I')
-        {
-            if (insert_hash_table(&value)) printf(" -> %i\n", value);
-            else if (insert_hash_table(&value) == 2) printf("%i EXISTS", value);
-            else printf("%i ERROR", value);
-        }
+        // if (scanf("%c", &instr) != 1) return -1;
+        // if (scanf("%i", &value) != 1) return -1;
+        // if (instr == 'I')
+        // {
+        //     if (insert_hash_table(&value)) printf(" -> %i\n", value);
+        //     else if (insert_hash_table(&value) == 2) printf("%i EXISTS", value);
+        //     else printf("%i ERROR", value);
+        // }
 
         if (instr == 'D')
         {
