@@ -101,16 +101,18 @@ int main()
 {
     int slots = 0, number = -1, key = 0;
     char instruction = 'A';
-    if(scanf("%i", &slots) != 1) return -1;
+    if(scanf("%d", &slots) != 1) return -1;
     int open[slots];
-    printf("%i\n", slots);
-    while (scanf("%s", &instruction) != EOF)
+
+    printf("Slots: %d\n", slots);
+    do
     {
-        printf("%i\n", slots);
+        scanf("%s", &instruction);
+        printf("Slots: %d\n", slots);
         
-        if (scanf("%i", &number) != 1) return -1;
+        if (scanf("%d", &number) != 1) return -1;
         
-        printf("%i\n", open[key]);
+        
         
         if (existsOpen(open, number, slots)) printf("%i EXISTS\n", number);
         else
@@ -119,7 +121,7 @@ int main()
             open[key] = number;
         }
         
-    }
+    } while (instruction != EOF || instruction != 'S');
     return 0;
 }
 
