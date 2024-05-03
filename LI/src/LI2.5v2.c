@@ -4,15 +4,12 @@
 #include <assert.h>
 #include <stdbool.h>
 
-#define TABLE_SIZE 20
 
 typedef struct
 {
     int value;
+    int key;
 } valor;
-
-valor *hash_table1[TABLE_SIZE];
-valor *hash_table2[TABLE_SIZE];
 
 unsigned int hash_function1(int value, int slots)
 {
@@ -24,27 +21,27 @@ unsigned int hash_function2(int *value, int *slots)
     return (*value / *slots) % *slots;
 }
 
-void init_hash_table() // init table empty (NULL)
+/*
+void init_hash_table(valor *hash_table1[], valor *hash_table2[], int slots) // init table empty (NULL)
 {
-    for (int i = 0; i < TABLE_SIZE; i++)
+    for (int i = 0; i < slots; i++)
     {
         hash_table1[i] = NULL;
         hash_table2[i] = NULL;
     }
 }
 
-/*
-int insert_hash_table(valor *v)
+int insert_hash_table(valor *v, valor *hash_table1[], int slots)
 {
     if (v == NULL) return 0;
-    int index = hash_function1(&v->value);\
+    int index = hash_function1(v->value, slots);
     if (hash_table1[index]->value == v->value)
     {
         return 2;
     }
-    for (int i = 0; i < TABLE_SIZE; i++)
+    for (int i = 0; i < slots; i++)
     {
-        int try = (index + i) % TABLE_SIZE;
+        int try = (index + i) % slots;
         if (hash_table1[try] == NULL)
         {
             hash_table1[try] = v;
@@ -54,9 +51,9 @@ int insert_hash_table(valor *v)
     return 0;
 }
 
-void print_hash_table()
+void print_hash_table(valor *hash_table1[], int slots)
 {
-    for (int i = 0; i < TABLE_SIZE; i++)
+    for (int i = 0; i < slots; i++)
     {
         if (hash_table1[i] != NULL)
         {
@@ -65,9 +62,9 @@ void print_hash_table()
     }
 }
 
-valor *search_hash_table(int *value)
+valor *search_hash_table(int *value, valor *hash_table1[], int slots)
 {
-    int index = hash_function1(value);
+    int index = hash_function1(*value, slots);
     if (hash_table1[index] != NULL && hash_table1[index]->value == *value)
     {
         return hash_table1[index];
@@ -75,9 +72,9 @@ valor *search_hash_table(int *value)
     else return NULL;
 }
 
-void delete_hash_table(int *value)
+void delete_hash_table(int *value, valor *hash_table1[], int slots)
 {
-    int index = hash_function1(value);
+    int index = hash_function1(*value, slots);
     if (hash_table1[index] != NULL && hash_table1[index]->value == *value)
     {
         hash_table1[index] = NULL;
@@ -85,11 +82,20 @@ void delete_hash_table(int *value)
 }
 */
 
-int existsOpen(int open[], int x, int slots)
+void init_open_table(int *open[], int slots) // init table empty (NULL)
 {
     for (int i = 0; i < slots; i++)
     {
-        if (x == open[i])
+        open[i] = NULL;
+    }
+}
+
+
+int existsOpen(int *open[], int x, int slots)
+{
+    for (int i = 0; i < slots; i++)
+    {
+        if (x == *open[i])
         {
             return 1;
         }
@@ -97,31 +103,66 @@ int existsOpen(int open[], int x, int slots)
     return 0;
 }
 
+void openFunction(int slots)
+{
+    char instruction[] = "A";
+    int number = -1, key = -1, *open[slots];
+    init_open_table(open, slots);
+    while (scanf("%s", instruction) != EOF || instruction[0] != 'S')
+    {
+        printf("SLOTS: %d\n", slots);
+        if (instruction[0] == 'P')
+        {
+            for (int i = 0; i < slots; i++)
+            {
+                if (open[i] != NULL)
+                {
+                    printf("%d\t%d\n", i, *open[i]);
+                }
+                
+            }
+            
+        }
+        else if (instruction[0] == 'I')
+        {
+            printf("SLOTS: %d\n", slots);
+            assert(scanf("%d", &number) == 1);
+            printf("SLOTS: %d\n", slots);    
+            if (existsOpen(open, number, slots)) printf("%i EXISTS\n", number);
+            else
+            {
+                key = hash_function1(number, slots);
+                *open[key] = number;
+                printf("%d -> %d\nOK\n", key, number);
+            }
+        }
+    }
+}
+
 int main()
 {
-    int slots = 0, number = -1, key = 0;
-    char instruction = 'A';
+    int slots = 0;
+    char type[] = "A";
+    
     if(scanf("%d", &slots) != 1) return -1;
-    int open[slots];
 
-    printf("Slots: %d\n", slots);
-    do
+    if (scanf("%s", type) != 1) return -1;
+    
+    // valor *hash_table1[slots];
+    // valor *hash_table2[slots];
+
+    if (!strcmp(type, "OPEN"))
     {
-        scanf("%s", &instruction);
-        printf("Slots: %d\n", slots);
+        openFunction(slots);
+    }
+    else if (!strcmp(type, "CUCKOO"))
+    {
         
-        if (scanf("%d", &number) != 1) return -1;
+    }
+    else if (!strcmp(type, "LINK"))
+    {
         
-        
-        
-        if (existsOpen(open, number, slots)) printf("%i EXISTS\n", number);
-        else
-        {
-            key = hash_function1(number, slots);
-            open[key] = number;
-        }
-        
-    } while (instruction != EOF || instruction != 'S');
+    }
     return 0;
 }
 
