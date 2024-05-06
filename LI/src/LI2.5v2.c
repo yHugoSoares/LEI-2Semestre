@@ -3,7 +3,7 @@
 #include <string.h>
 #include <assert.h>
 #include <stdbool.h>
-
+#include <math.h>
 
 typedef struct
 {
@@ -18,7 +18,7 @@ unsigned int hash_function1(int value, int slots)
 
 unsigned int hash_function2(int *value, int *slots)
 {
-    return (floor(*value / *slots)) % *slots;
+    return (*value / *slots) % *slots;
 }
 
 
@@ -104,7 +104,7 @@ int openInsert(int *open[], int deleted[], int slots, int x)
 
 void openSearch(int *open[], int deleted[], int slots, int x)
 {
-    int key = hash(0, x, slots);
+    int key = hash_function1(x, slots);
     int start = key;
     int deletedSlotKey = -1;
 
@@ -138,6 +138,37 @@ void openSearch(int *open[], int deleted[], int slots, int x)
     printf("NO\n");
 }
 
+void openDelete(int * open[], int deleted[], int slots, int key, int x)
+{
+    int start = key;
+    while (open[key] != NULL)
+    {
+        if (*open[key] == x && deleted[key] == 0)
+        {
+            deleted[key] = 1;
+            printf("OK\n");
+            return;
+        }
+        key++;
+        if (key == slots)
+            key = 0;
+        if (key == start)
+        {
+            printf("NO\n");
+            return;
+        }
+    }
+}
+
+void openPrint(int * open[], int deleted[], int slots)
+{
+    for(int i = 0; i < slots; i++)
+    {
+        if (open[i] != NULL && deleted[i] == 0) printf("%d\t%d\n", i, *open[i]);
+        else if (open[i] != NULL && deleted[i] == 1) printf("%d\t%c\n", i, 'D');
+    }
+}
+
 void openFunction(int slots)
 {
     int *open[slots];
@@ -153,11 +184,11 @@ void openFunction(int slots)
         int key;
         if (instruction[0] != 'P') assert(scanf("%d", &number) == 1);
             
-        key = hash(0, number, slots);
+        key = hash_function1(number, slots);
 
         if (instruction[0] == 'I')
         {
-            if (openInsertion(open, deleted, slots, number)) break;
+            if (openInsert(open, deleted, slots, number)) break;
         }
         if (instruction[0] == 'C') 
         {

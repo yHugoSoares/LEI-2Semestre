@@ -491,20 +491,27 @@ void cuckoo(int tableSize)
     {
         int key;
         if (instruction[0] != 'P')
+        {
             assert(scanf("%d", &number) == 1);
-            
+        }    
         key = hash(0, number, tableSize);
 
         if (instruction[0] == 'I')
         {
             if (tables[0][key] != NULL && *tables[0][key] == number)
+            {
                 printf("%d EXISTS\n", *tables[0][key]);
+            }
             else
+            {
                 cuckooInsertion(tableSize, tables, 0, number, 0);
+            }
         }
 
         if (instruction[0] == 'P')
+        {
             cuckooPrint(tableSize, tables);
+        }
     }
 }
 
@@ -518,11 +525,16 @@ int main()
     assert(scanf("%s", protocol) != 0);
 
     if (!strcmp(protocol, "OPEN"))
+    {
         open(tableSize);
+    }
     if (!strcmp(protocol, "LINK"))
+    {
         link(tableSize);
+    }
     if (!strcmp(protocol, "CUCKOO"))
+    {
         cuckoo(tableSize);
-    
+    }
     return 0;
 }
