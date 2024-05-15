@@ -1,0 +1,64 @@
+N:
+        .long   5
+grades:
+        .long   19
+        .long   6
+        .long   17
+        .long   10
+        .long   8
+countGreater:
+        pushl   %ebp
+        movl    %esp, %ebp
+        subl    $24, %esp
+        movl    $0, -12(%ebp)
+        cmpl    $0, 16(%ebp)
+        jle     .L2
+        movl    12(%ebp), %eax
+        movl    (%eax), %eax
+        cmpl    8(%ebp), %eax
+        setg    %al
+        movzbl  %al, %eax
+        movl    %eax, -12(%ebp)
+        movl    16(%ebp), %eax
+        leal    -1(%eax), %edx
+        movl    12(%ebp), %eax
+        addl    $4, %eax
+        subl    $4, %esp
+        pushl   %edx
+        pushl   %eax
+        pushl   8(%ebp)
+        call    countGreater
+        addl    $16, %esp
+        addl    %eax, -12(%ebp)
+.L2:
+        movl    -12(%ebp), %eax
+        leave
+        ret
+.LC0:
+        .string "Positivas: %d\n"
+main:
+        leal    4(%esp), %ecx
+        andl    $-16, %esp
+        pushl   -4(%ecx)
+        pushl   %ebp
+        movl    %esp, %ebp
+        pushl   %ecx
+        subl    $20, %esp
+        movl    N, %eax
+        subl    $4, %esp
+        pushl   %eax
+        pushl   $grades
+        pushl   $9
+        call    countGreater
+        addl    $16, %esp
+        movl    %eax, -12(%ebp)
+        subl    $8, %esp
+        pushl   -12(%ebp)
+        pushl   $.LC0
+        call    printf
+        addl    $16, %esp
+        movl    $0, %eax
+        movl    -4(%ebp), %ecx
+        leave
+        leal    -4(%ecx), %esp
+        ret
