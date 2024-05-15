@@ -30,8 +30,10 @@ int hash_function(int key, int table_size) {
 
 void insert_open_addressing(hash_table* table, int key, int value) {
     int index = hash_function(key, table->capacity);
-    while (table->entries[index].key!= -1) {
-        if (table->entries[index].key == key) {
+    while (table->entries[index].key!= -1) 
+    {
+        if (table->entries[index].key == key) 
+        {
             printf("%d EXISTS\n", key);
             return;
         }
@@ -43,7 +45,8 @@ void insert_open_addressing(hash_table* table, int key, int value) {
     table->length++;
 }
 
-void insert_linked_list(hash_table* table, int key, int value) {
+void insert_linked_list(hash_table* table, int key, int value) 
+{
     item* new_item = malloc(sizeof(item));
     new_item->key = key;
     new_item->value = value;
@@ -53,7 +56,8 @@ void insert_linked_list(hash_table* table, int key, int value) {
     printf("%d -> %d\n", table->length - 1, key);
 }
 
-void insert_cuckoo(hash_table* table1, hash_table* table2, int key, int value) {
+void insert_cuckoo(hash_table* table1, hash_table* table2, int key, int value) 
+{
     int index1 = hash_function(key, table1->capacity);
     int index2 = hash_function(key, table2->capacity);
     if (table1->entries[index1].key == -1) {

@@ -6,32 +6,31 @@
 #include <wchar.h>
 #include <assert.h>
 
-int hash(int table, int number, int tableSize)
+int hash(int table, int number, int slots)
 {
     if (table == 0)
-        return number % tableSize;
+        return number % slots;
     else
     {
-        int n = floor(number / tableSize);
-        return n % tableSize;
+        int n = floor(number / slots);
+        return n % slots;
     }
 }
 
-void initTable(int * table[], int tableSize)
+void initTable(int * table[], int slots)
 {
-    for(int i = 0; i < tableSize; i++)
+    for(int i = 0; i < slots; i++)
         table[i] = NULL;
 }
 
-void initDeleted(int deleted[], int tableSize)
+void initDeleted(int deleted[], int slots)
 {
-    for(int i = 0; i < tableSize; i++)
-        deleted[i] = 0;
+    for(int i = 0; i < slots; i++) deleted[i] = 0;
 }
 
-int openInsertion(int * table[], int deleted[], int tableSize, int number)
+int openInsertion(int * table[], int deleted[], int slots, int number)
 {
-    int key = hash(0, number, tableSize);
+    int key = hash(0, number, slots);
     int start = key;
     int deletedSlotKey = -1;
 
@@ -61,7 +60,7 @@ int openInsertion(int * table[], int deleted[], int tableSize, int number)
         }
 
         key++;
-        if (key == tableSize)
+        if (key == slots)
             key = 0;
 
         if (key == start)
@@ -92,9 +91,9 @@ int openInsertion(int * table[], int deleted[], int tableSize, int number)
     return 0;
 }
 
-void openSearch(int * table[], int deleted[], int tableSize, int number)
+void openSearch(int *table[], int deleted[], int slots, int number)
 {
-    int key = hash(0, number, tableSize);
+    int key = hash(0, number, slots);
     int start = key;
     int deletedSlotKey = -1;
 
@@ -118,7 +117,7 @@ void openSearch(int * table[], int deleted[], int tableSize, int number)
         }
 
         key++;
-        if (key == tableSize)
+        if (key == slots)
             key = 0;
 
         if (key == start)
@@ -128,7 +127,7 @@ void openSearch(int * table[], int deleted[], int tableSize, int number)
     printf("NO\n");
 }
 
-void openDelete(int * table[], int deleted[], int tableSize, int key, int number)
+void openDelete(int * table[], int deleted[], int slots, int key, int number)
 {
     int start = key;
     while (table[key] != NULL)
@@ -140,7 +139,7 @@ void openDelete(int * table[], int deleted[], int tableSize, int key, int number
             return;
         }
         key++;
-        if (key == tableSize)
+        if (key == slots)
             key = 0;
         if (key == start)
         {
@@ -150,9 +149,9 @@ void openDelete(int * table[], int deleted[], int tableSize, int key, int number
     }
 }
 
-void openPrint(int * table[], int deleted[], int tableSize)
+void openPrint(int * table[], int deleted[], int slots)
 {
-    for(int i = 0; i < tableSize; i++)
+    for(int i = 0; i < slots; i++)
     {
         if (table[i] != NULL && deleted[i] == 0)
         printf("%d\t%d\n", i, *table[i]);
@@ -161,12 +160,12 @@ void openPrint(int * table[], int deleted[], int tableSize)
     }
 }
 
-void open(int tableSize)
+void open(int slots)
 {
-    int * table[tableSize];
-    int deleted[tableSize];
-    initTable(table, tableSize);
-    initDeleted(deleted, tableSize);
+    int * table[slots];
+    int deleted[slots];
+    initTable(table, slots);
+    initDeleted(deleted, slots);
 
     char instruction[] = "A";
     int number = -1;
@@ -177,14 +176,14 @@ void open(int tableSize)
         if (instruction[0] != 'P')
             assert(scanf("%d", &number) == 1);
             
-        key = hash(0, number, tableSize);
+        key = hash(0, number, slots);
 
         if (instruction[0] == 'I')
-            if (openInsertion(table, deleted, tableSize, number))
+            if (openInsertion(table, deleted, slots, number))
                 break;
 
         if (instruction[0] == 'C')
-            openSearch(table, deleted, tableSize, number);
+            openSearch(table, deleted, slots, number);
 
         if (instruction[0] == 'D')
         {
@@ -196,11 +195,11 @@ void open(int tableSize)
                 printf("OK\n");
             }
             else
-                openDelete(table, deleted, tableSize, key, number);
+                openDelete(table, deleted, slots, key, number);
         }
 
         if (instruction[0] == 'P')
-            openPrint(table, deleted, tableSize);
+            openPrint(table, deleted, slots);
     }
 }
 
@@ -214,9 +213,9 @@ typedef struct linkedLists
     struct linkedLists * prox;
 } *linkL;
 
-linkL linkInsert(linkL l, int tableSize, int number)
+linkL linkInsert(linkL l, int slots, int number)
 {
-    int key = hash(0, number, tableSize);
+    int key = hash(0, number, slots);
 
     int keyExists = 0;
     int numberExists = 0;
@@ -261,7 +260,7 @@ linkL linkInsert(linkL l, int tableSize, int number)
             numbers[i+1] = temp->numbers[i];
         for (int i = 0; i < temp->nCount+1; i++)
             temp->numbers[i] = numbers[i];
-        
+
         temp->nCount++;
 
         printf("%d -> %d\nOK\n", key, number);
@@ -299,9 +298,9 @@ linkL linkInsert(linkL l, int tableSize, int number)
 
 }
 
-void linkSearch(linkL l, int tableSize, int number)
+void linkSearch(linkL l, int slots, int number)
 {
-int key = hash(0, number, tableSize);
+int key = hash(0, number, slots);
 
     int numberExists = 0;
 
@@ -326,9 +325,9 @@ int key = hash(0, number, tableSize);
         printf("NO\n");
 }
 
-linkL linkDelete(linkL l, int tableSize, int number)
+linkL linkDelete(linkL l, int slots, int number)
 {
-    int key = hash(0, number, tableSize);
+    int key = hash(0, number, slots);
 
     int numberExists = 0;
 
@@ -401,7 +400,7 @@ void linkPrint(linkL l)
     }
 }
 
-void link(int tableSize)
+void link(int slots)
 {
     linkL l = NULL;
 
@@ -414,16 +413,16 @@ void link(int tableSize)
             assert(scanf("%d", &number) == 1);
 
         if (instruction[0] == 'I')
-            l = linkInsert(l, tableSize, number);
+            l = linkInsert(l, slots, number);
 
         if (instruction[0] == 'C')
         {
-            linkSearch(l, tableSize, number);
+            linkSearch(l, slots, number);
         }
 
         if (instruction[0] == 'D')
         {
-            l = linkDelete(l, tableSize, number);
+            l = linkDelete(l, slots, number);
         }
 
         if (instruction[0] == 'P')
@@ -434,12 +433,12 @@ void link(int tableSize)
 }
 
 
-void cuckooInsertion(int tableSize, int * tables[][tableSize], int currentTable, int number, int tries)
+void cuckooInsertion(int slots, int * tables[][slots], int currentTable, int number, int tries)
 {
-    int key = hash(currentTable, number, tableSize);
+    int key = hash(currentTable, number, slots);
     int kickedNumber = -1;
     
-    if (tries > tableSize)
+    if (tries > slots)
     {
         printf("GIVING UP!\n");
         return;
@@ -460,29 +459,29 @@ void cuckooInsertion(int tableSize, int * tables[][tableSize], int currentTable,
 
         currentTable = !currentTable;
 
-        cuckooInsertion(tableSize, tables, currentTable, kickedNumber, tries);
+        cuckooInsertion(slots, tables, currentTable, kickedNumber, tries);
     }
 }
 
-void cuckooPrint(int tableSize, int * tables[][tableSize])
+void cuckooPrint(int slots, int * tables[][slots])
 {
-    for(int i = 0; i < tableSize; i++)
+    for(int i = 0; i < slots; i++)
     {
         if (tables[0][i] != NULL)
         printf("%d\t%d\t%d\n", 0, i, *tables[0][i]);
     }
-    for(int i = 0; i < tableSize; i++)
+    for(int i = 0; i < slots; i++)
     {
         if (tables[1][i] != NULL)
         printf("%d\t%d\t%d\n", 1, i, *tables[1][i]);
     }
 }
 
-void cuckoo(int tableSize)
+void cuckoo(int slots)
 {
-    int * tables[2][tableSize];
-    initTable(tables[0], tableSize);
-    initTable(tables[1], tableSize);
+    int * tables[2][slots];
+    initTable(tables[0], slots);
+    initTable(tables[1], slots);
 
     char instruction[] = "A";
     int number = -1;
@@ -494,7 +493,7 @@ void cuckoo(int tableSize)
         {
             assert(scanf("%d", &number) == 1);
         }    
-        key = hash(0, number, tableSize);
+        key = hash(0, number, slots);
 
         if (instruction[0] == 'I')
         {
@@ -504,13 +503,13 @@ void cuckoo(int tableSize)
             }
             else
             {
-                cuckooInsertion(tableSize, tables, 0, number, 0);
+                cuckooInsertion(slots, tables, 0, number, 0);
             }
         }
 
         if (instruction[0] == 'P')
         {
-            cuckooPrint(tableSize, tables);
+            cuckooPrint(slots, tables);
         }
     }
 }
@@ -518,23 +517,23 @@ void cuckoo(int tableSize)
 
 int main()
 {    
-    int tableSize;
-    assert(scanf("%d", &tableSize) == 1);
+    int slots;
+    assert(scanf("%d", &slots) == 1);
 
     char protocol[7];
     assert(scanf("%s", protocol) != 0);
 
     if (!strcmp(protocol, "OPEN"))
     {
-        open(tableSize);
+        open(slots);
     }
     if (!strcmp(protocol, "LINK"))
     {
-        link(tableSize);
+        link(slots);
     }
     if (!strcmp(protocol, "CUCKOO"))
     {
-        cuckoo(tableSize);
+        cuckoo(slots);
     }
     return 0;
 }
